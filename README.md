@@ -31,7 +31,7 @@ This example shows how to play sound instantly when loaded.
 jQuery Version
 --------------
 
-[src/jquery.js][jquery] and [build/jquery.jWebAudio.js][jqueryJWA] should always be included to use the jQuery version.
+[jQuery.js][jquery] and [build/jquery.jWebAudio.js][jqueryJWA] should always be included to use the jQuery version.
 
 ```html
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -361,8 +361,8 @@ effect = source.sound.getEffect(id);
 effect.node.setPosition(1, 0, 0);
 ```
 
-[jquery]: https://github.com/otcshare/AudioVision.js/tree/jQuery/src/jquery-1.8.2.js
-[jqueryJWA]: https://github.com/otcshare/AudioVision.js/tree/jQuery/build/jquery.jWebAudio.js
-[njqueryJWA]: https://github.com/otcshare/AudioVision.js/tree/jQuery/build/standard.jWebAudio.js
-[examples]: https://github.com/otcshare/AudioVision.js/tree/jQuery/examples/index.html
+[jquery]: http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js
+[jqueryJWA]: https://github.com/01org/jWebAudio/blob/master/build/jquery.jWebAudio.js
+[njqueryJWA]: https://github.com/01org/jWebAudio/blob/master/build/standard.jWebAudio.js
+[examples]: https://github.com/01org/jWebAudio/blob/master/examples/index.html
 

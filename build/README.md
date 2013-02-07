@@ -43,6 +43,6 @@ For debug
 
 Please use standard.jWebAudio.js.
 
-[wrapper]: https://github.com/otcshare/AudioVision.js/tree/jQuery/src/jquery.jWebAudio.wrapper.js
-[srcNonJwa]: https://github.com/otcshare/AudioVision.js/tree/jQuery/src/standard.jWebAudio.js
+[wrapper]: https://github.com/01org/jWebAudio/blob/master/src/jquery.jWebAudio.wrapper.js
+[srcNonJwa]: https://github.com/01org/jWebAudio/blob/master/src/standard.jWebAudio.js
 [closure]: http://closure-compiler.appspot.com/
