@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            var sources = null;
+            
+            function onload() {
+                var urls = ['../../examples/resource/in.wav',
+                            '../../examples/resource/out.wav'];
+                var engine = new jWebAudio.SoundEngine();
+                sources = engine.addSoundSource({
+                    'url': urls
+                });
+                for (var i in sources) {
+                    sources[i].load(function(url) {
+                        return function() {
+                            var para = document.createElement('p');
+                            var output = document.createTextNode('Loaded ' + url + '!');
+                            para.appendChild(output);
+                            document.getElementById('output').appendChild(para);
+                        };
+                    }(urls[i]));
+                    
+                    /* Notice that the following is the wrong way to pass callback
+                     * functions to load. Every anonymous callback function has the
+                     * onload activation object in its scope chain, referring to 
+                     * the same i. When onload returns, the value of i is 1 in this
+                     * case, so it will output 'Loaded ../../examples/resource/out.wav!'
+                     * twice.
+                     *
+                     * See JavaScript closure and scope chain for more information.
+                     *
+                     * sources[i].load(function() {
+                     *     var para = document.createElement('p');
+                     *     var output = document.createTextNode('Loaded ' + urls[i] + '!');
+                     *     para.appendChild(output);
+                     *     document.getElementById('output').appendChild(para);
+                     * });
+                     */
+                }
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div class="title">Output:</div>
+            <div id="output"></div>
+        
+            <div class="title">Description:</div>
+            Load sound.
+            
+            <div class="title">Result:</div>
+            Output 'Loaded ../../examples/resource/in.wav!' and 'Loaded ../../examples/resource/out.wav!'.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [11, 18]; toolbar: false;">
+            var sources = null;
+            
+            function onload() {
+                var urls = ['../../examples/resource/in.wav',
+                            '../../examples/resource/out.wav'];
+                var engine = new jWebAudio.SoundEngine();
+                sources = engine.addSoundSource({
+                    'url': urls
+                });
+                for (var i in sources) {
+                    sources[i].load(function(url) {
+                        return function() {
+                            var para = document.createElement('p');
+                            var output = document.createTextNode('Loaded ' + url + '!');
+                            para.appendChild(output);
+                            document.getElementById('output').appendChild(para);
+                        };
+                    }(urls[i]));
+                    
+                    /* Notice that the following is the wrong way to pass callback
+                     * functions to load. Every anonymous callback function has the
+                     * onload activation object in its scope chain, referring to 
+                     * the same i. When onload returns, the value of i is 1 in this
+                     * case, so it will output 'Loaded ../../examples/resource/out.wav!'
+                     * twice.
+                     *
+                     * See JavaScript closure and scope chain for more information.
+                     *
+                     * sources[i].load(function() {
+                     *     var para = document.createElement('p');
+                     *     var output = document.createTextNode('Loaded ' + urls[i] + '!');
+                     *     para.appendChild(output);
+                     *     document.getElementById('output').appendChild(para);
+                     * });
+                     */
+                }
+            }
+            </pre>
+        </div>
+    </body>
+</html>

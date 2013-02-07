@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            var sound = null;
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                var source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        sound = source.sound;
+                        sound.play();
+                    }
+                });
+            }
+            
+            var teleId = null;
+            function teleClick() {
+                if (document.getElementById('teleInput').checked) {
+                    teleId = sound.addEffect('telephonize');
+                } else if (teleId !== null) {
+                    sound.deleteEffect(teleId);
+                }
+            }
+            
+            var cathId = null;
+            function cathClick() {
+                if (document.getElementById('cathInput').checked) {
+                    cathId = sound.addEffect('cathedral');
+                } else if (cathId !== null) {
+                    sound.deleteEffect(cathId);
+                }
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div id="panel">
+                <input id="teleInput" name="effect" type="checkbox" value="telephonize" onclick="teleClick()" />Use telephonize<br>
+                <input id="cathInput" name="effect" type="checkbox" value="cathedral" onclick="cathClick()" />Use cathedral<br>
+            </div>
+        
+            <div class="title">Description:</div>
+            Add and delete default sound effects.
+            
+            <div class="title">Result:</div>
+            Note the sound Effect difference.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [17, 19, 26, 28]; toolbar: false;">
+            var sound = null;
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                var source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        sound = source.sound;
+                        sound.play();
+                    }
+                });
+            }
+            
+            var teleId = null;
+            function teleClick() {
+                if (document.getElementById('teleInput').checked) {
+                    teleId = sound.addEffect('telephonize');
+                } else if (teleId !== null) {
+                    sound.deleteEffect(teleId);
+                }
+            }
+            
+            var cathId = null;
+            function cathClick() {
+                if (document.getElementById('cathInput').checked) {
+                    cathId = sound.addEffect('cathedral');
+                } else if (cathId !== null) {
+                    sound.deleteEffect(cathId);
+                }
+            }
+            </pre>
+        </div>
+    </body>
+</html>

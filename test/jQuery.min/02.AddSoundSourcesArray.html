@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            function onload() {
+                // jQuery version stores one sound in each element,
+                // so url cannot be an array of string
+                $('.sound').each(function() {
+                    $(this).jWebAudio('addSoundSource', {
+                        'url': '../../examples/resource/' + $(this).attr('id') + '.wav'
+                    });
+                });
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="in" class="sound"></div>
+        <div id="out" class="sound"></div>
+        
+        <div id="content">
+            <div class="title">Description:</div>
+            Add array of sound sources.
+            
+            <div class="title">Result:</div>
+            None.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; toolbar: false;">
+            function onload() {
+                // jQuery version stores one sound in each element,
+                // so url cannot be an array of string
+                $('.sound').each(function() {
+                    $(this).jWebAudio('addSoundSource', {
+                        'url': '../../examples/resource/' + $(this).attr('id') + '.wav'
+                    });
+                });
+            }
+            </pre>
+        </div>
+    </body>
+</html>

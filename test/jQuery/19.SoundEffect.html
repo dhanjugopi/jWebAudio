@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'multishot': true,
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                    }
+                });
+            }
+            
+            var teleId = null;
+            function teleClick() {
+                if ($('#teleInput')[0].checked) {
+                    teleId = $('#audio').jWebAudio('addEffect', 'telephonize');
+                    $('#clearBtn')[0].enabled = true;
+                } else if (teleId !== null) {
+                    $('#audio').jWebAudio('deleteEffect', teleId);
+                }
+            }
+            
+            var cathId = null;
+            function cathClick() {
+                if ($('#cathInput')[0].checked) {
+                    cathId = $('#audio').jWebAudio('addEffect', 'cathedral');
+                    $('#clearBtn')[0].enabled = true;
+                } else if (cathId !== null) {
+                    $('#audio').jWebAudio('deleteEffect', cathId);
+                }
+            }
+            
+            function clearAll() {
+                $('#audio').jWebAudio('clearAllEffects');
+                $('#cathInput')[0].checked = false;
+                $('#teleInput')[0].checked = false;
+                $('#clearBtn')[0].enabled = false;
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="audio" class="sound"></div>
+        
+        <div id="content">
+            <div id="panel">
+                <input id="teleInput" name="effect" type="checkbox" value="telephonize" onclick="teleClick()" />Use telephonize<br>
+                <input id="cathInput" name="effect" type="checkbox" value="cathedral" onclick="cathClick()" />Use cathedral<br>
+                <button id="clearBtn" onclick="clearAll()">Clear both effects</button>
+            </div>
+        
+            <div class="title">Description:</div>
+            Add and delete default sound effects.
+            
+            <div class="title">Result:</div>
+            Note the sound Effect difference.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [15, 18, 25, 28, 33]; toolbar: false;">
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'multishot': true,
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                    }
+                });
+            }
+            
+            var teleId = null;
+            function teleClick() {
+                if ($('#teleInput')[0].checked) {
+                    teleId = $('#audio').jWebAudio('addEffect', 'telephonize');
+                    $('#clearBtn')[0].enabled = true;
+                } else if (teleId !== null) {
+                    $('#audio').jWebAudio('deleteEffect', teleId);
+                }
+            }
+            
+            var cathId = null;
+            function cathClick() {
+                if ($('#cathInput')[0].checked) {
+                    cathId = $('#audio').jWebAudio('addEffect', 'cathedral');
+                    $('#clearBtn')[0].enabled = true;
+                } else if (cathId !== null) {
+                    $('#audio').jWebAudio('deleteEffect', cathId);
+                }
+            }
+            
+            function clearAll() {
+                $('#audio').jWebAudio('clearAllEffects');
+                $('#cathInput')[0].checked = false;
+                $('#teleInput')[0].checked = false;
+                $('#clearBtn')[0].enabled = false;
+            }
+            </pre>
+        </div>
+    </body>
+</html>

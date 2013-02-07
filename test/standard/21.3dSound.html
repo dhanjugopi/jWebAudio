@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            var source = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        source.sound.play();
+                    }
+                });
+            }
+            
+            var useEffect = false;
+            var id = null;
+            function toggleEffect() {
+                useEffect = !useEffect;
+                if (useEffect) {
+                    id = source.sound.addEffect('3d');
+                } else if (id !== null) {
+                    source.sound.deleteEffect(id);
+                }
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div id="panel">
+                <button id="effectBtn" onclick="toggleEffect();">Toggle 3D Effect</button>
+            </div>
+            
+            <div class="title">Description:</div>
+            Play sound 3D effect using default parameters.
+            
+            <div class="title">Result:</div>
+            Note the sound 3D Effect difference.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: 19; toolbar: false;">
+            var source = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        source.sound.play();
+                    }
+                });
+            }
+            
+            var useEffect = false;
+            var id = null;
+            function toggleEffect() {
+                useEffect = !useEffect;
+                if (useEffect) {
+                    id = source.sound.addEffect('3d');
+                } else if (id !== null) {
+                    source.sound.deleteEffect(id);
+                }
+            }
+            </pre>
+        </div>
+    </body>
+</html>

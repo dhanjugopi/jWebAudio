@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                var source = engine.addSoundSource({
+                    'url': ['../../examples/resource/in.wav',
+                        '../../examples/resource/out.wav']
+                });
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div class="title">Description:</div>
+            Add array of sound sources.
+            
+            <div class="title">Result:</div>
+            None.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; toolbar: false;">
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                var source = engine.addSoundSource({
+                    'url': ['../../examples/resource/in.wav',
+                        '../../examples/resource/out.wav']
+                });
+            }
+            </pre>
+        </div>
+    </body>
+</html>

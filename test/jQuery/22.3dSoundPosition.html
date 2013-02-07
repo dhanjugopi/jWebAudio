@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            var effect = null;
+            var pos = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+            
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                        var id = $('#audio').jWebAudio('addEffect', '3d');
+                        effect = $('#audio').jWebAudio('getEffect', id);
+                        
+                        // enable UI
+                        $('input').each(function() {
+                            $(this)[0].disabled = false;
+                        });
+                    }
+                });
+            }
+            
+            function xChange() {
+                var x = $('#xInput')[0].value;
+                $('#xLabel').text(x);
+                pos.x = parseInt(x);
+                effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+            }
+            
+            function yChange() {
+                var y = $('#yInput')[0].value;
+                $('#yLabel').text(y);
+                pos.y = parseInt(y);
+                effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+            }
+            
+            function zChange() {
+                var z = $('#zInput')[0].value;
+                $('#zLabel').text(z);
+                pos.z = parseInt(z);
+                effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="audio" class="sound"></div>
+        
+        <div id="content">
+            <div id="panel">
+                <input id="xInput" type="range" min="-10" max="10" value="0" onchange="xChange()" disabled="true" />
+                X:<label id="xLabel">0</label><br>
+                
+                <input id="yInput" type="range" min="-10" max="10" value="0" onchange="yChange()" disabled="true" />
+                Y:<label id="yLabel">0</label><br>
+                
+                <input id="zInput" type="range" min="-10" max="10" value="0" onchange="zChange()" disabled="true" />
+                Z:<label id="zLabel">0</label><br>
+            </div>
+            
+            <div class="title">Description:</div>
+            Set position of 3D Effect.
+            
+            <div class="title">Result:</div>
+            Sound change with value of x, y and z input.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [29, 36, 43]; toolbar: false;">
+            var effect = null;
+            var pos = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+            
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                        var id = $('#audio').jWebAudio('addEffect', '3d');
+                        effect = $('#audio').jWebAudio('getEffect', id);
+                        
+                        // enable UI
+                        $('input').each(function() {
+                            $(this)[0].disabled = false;
+                        });
+                    }
+                });
+            }
+            
+            function xChange() {
+                var x = $('#xInput')[0].value;
+                $('#xLabel').text(x);
+                pos.x = parseInt(x);
+                effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+            }
+            
+            function yChange() {
+                var y = $('#yInput')[0].value;
+                $('#yLabel').text(y);
+                pos.y = parseInt(y);
+                effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+            }
+            
+            function zChange() {
+                var z = $('#zInput')[0].value;
+                $('#zLabel').text(z);
+                pos.z = parseInt(z);
+                effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+            }
+            </pre>
+        </div>
+    </body>
+</html>

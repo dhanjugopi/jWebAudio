@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                    }
+                });
+            }
+            
+            var useEffect = false;
+            var id = null;
+            function toggleEffect() {
+                useEffect = !useEffect;
+                if (useEffect) {
+                    id = $('#audio').jWebAudio('addEffect', {
+                        name: 'myEffect', 
+                        options: [{
+                            "type": jWebAudio.Filter.prototype.LOWPASS,
+                            "frequency": 1000.0
+                        }, {
+                            "type": jWebAudio.Filter.prototype.HIGHPASS,
+                            "frequency": 500.0
+                        }]
+                    });
+                } else if (id !== null) {
+                    $('#audio').jWebAudio('deleteEffect', id);
+                }
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="audio" class="sound"></div>
+        
+        <div id="content">
+            <div id="panel">
+                <button id="effectBtn" onclick="toggleEffect();">Toggle Effect</button>
+            </div>
+            
+            <div class="title">Description:</div>
+            Play sound effect defined by users.
+            
+            <div class="title">Result:</div>
+            Note the sound Effect difference.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25]; toolbar: false;">
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                    }
+                });
+            }
+            
+            var useEffect = false;
+            var id = null;
+            function toggleEffect() {
+                useEffect = !useEffect;
+                if (useEffect) {
+                    id = $('#audio').jWebAudio('addEffect', {
+                        name: 'myEffect', 
+                        options: [{
+                            "type": jWebAudio.Filter.prototype.LOWPASS,
+                            "frequency": 1000.0
+                        }, {
+                            "type": jWebAudio.Filter.prototype.HIGHPASS,
+                            "frequency": 500.0
+                        }]
+                    });
+                } else if (id !== null) {
+                    $('#audio').jWebAudio('deleteEffect', id);
+                }
+            }
+            </pre>
+        </div>
+    </body>
+</html>

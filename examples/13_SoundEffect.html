@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <script type="text/javascript" src="../build/standard.jWebAudio.js"></script>
+        
+        <script type="text/javascript" src="js/shCore.js"></script>
+        <script type="text/javascript" src="js/shBrushJScript.js"></script>
+        <script type="text/javascript" src="js/shBrushXml.js"></script>
+        
+        <link href="css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript">
+            var source = null;
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': 'resource/a.ogg'
+                });
+                source.load(function() {
+                    source.sound.play();
+                });
+            }
+            
+            var useEffect = false;
+            var id = null;
+            function toggleEffect() {
+                useEffect = !useEffect;
+                if (useEffect) {
+                    id = source.sound.addEffect('telephonize');
+                } else if (id !== null) {
+                    source.sound.deleteEffect(id);
+                }
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    <body style="background-color:#0A2B1D" onload="onload();">
+        <button id="effectBtn" onclick="toggleEffect();">Telephone Effect</button>
+        <div id="div1"></div>
+        <pre class="brush: js; highlight: [17, 19]; toolbar: false;">
+            var source = null;
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': 'resource/a.ogg'
+                });
+                source.sound.load(function() {
+                    source.play();
+                });
+            }
+            
+            var useEffect = false;
+            var id = null;
+            function toggleEffect() {
+                useEffect = !useEffect;
+                if (useEffect) {
+                    id = source.sound.addEffect('telephonize');
+                } else if (id !== null) {
+                    source.sound.deleteEffect(id);
+                }
+            }
+        </pre>
+    </body>
+</html>

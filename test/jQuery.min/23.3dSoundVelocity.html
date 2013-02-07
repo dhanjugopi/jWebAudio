@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            var effect = null;
+            var v = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+            
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                        var id = $('#audio').jWebAudio('addEffect', '3d');
+                        effect = $('#audio').jWebAudio('getEffect', id);
+                        
+                        // enable UI
+                        $('input').each(function() {
+                            $(this)[0].disabled = false;
+                        });
+                    }
+                });
+            }
+            
+            function xChange() {
+                var x = $('#xInput')[0].value;
+                $('#xLabel').text(x);
+                v.x = parseFloat(x);
+                effect.soundObject.setVelocity(v.x, v.y, v.z);
+            }
+            
+            function yChange() {
+                var y = $('#yInput')[0].value;
+                $('#yLabel').text(y);
+                v.y = parseFloat(y);
+                effect.soundObject.setVelocity(v.x, v.y, v.z);
+            }
+            
+            function zChange() {
+                var z = $('#zInput')[0].value;
+                $('#zLabel').text(z);
+                v.z = parseFloat(z);
+                effect.soundObject.setVelocity(v.x, v.y, v.z);
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="audio" class="sound"></div>
+        
+        <div id="content">
+            <div id="panel">
+                <input id="xInput" type="range" min="-0.1" max="0.1" step="0.005" value="0" onchange="xChange()" disabled="true" />
+                X:<label id="xLabel">0</label><br>
+                
+                <input id="yInput" type="range" min="-0.1" max="0.1" step="0.005" value="0" onchange="yChange()" disabled="true" />
+                Y:<label id="yLabel">0</label><br>
+                
+                <input id="zInput" type="range" min="-0.1" max="0.1" step="0.005" value="0" onchange="zChange()" disabled="true" />
+                Z:<label id="zLabel">0</label><br>
+            </div>
+            
+            <div class="title">Description:</div>
+            Set velocity of 3D Effect.
+            
+            <div class="title">Result:</div>
+            Doppler effect change with value of x, y and z input.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [33, 40, 47]; toolbar: false;">
+            var effect = null;
+            var v = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+            
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                        var id = $('#audio').jWebAudio('addEffect', '3d');
+                        effect = $('#audio').jWebAudio('getEffect', id);
+                        
+                        // enable UI
+                        $('input').each(function() {
+                            $(this)[0].disabled = false;
+                        });
+                    }
+                });
+            }
+            
+            function xChange() {
+                var x = $('#xInput')[0].value;
+                $('xLabel').text(x);
+                v.x = parseInt(x);
+                effect.soundObject.setVelocity(v.x, v.y, v.z);
+            }
+            
+            function yChange() {
+                var y = $('#yInput')[0].value;
+                $('xLabel').text(y);
+                v.y = parseInt(y);
+                effect.soundObject.setVelocity(v.x, v.y, v.z);
+            }
+            
+            function zChange() {
+                var z = $('#zInput')[0].value;
+                $('zLabel').text(z);
+                v.z = parseInt(z);
+                effect.soundObject.setVelocity(v.x, v.y, v.z);
+            }
+            </pre>
+        </div>
+    </body>
+</html>

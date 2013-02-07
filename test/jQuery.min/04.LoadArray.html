@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            function onload() {
+                $('.sound').each(function() {
+                    var url = '../../examples/resource/' + $(this).attr('id') + '.wav';
+                    $(this).jWebAudio('addSoundSource', {
+                        url: url
+                    });
+                    $(this).jWebAudio('load', function() {
+                        var para = document.createElement('p');
+                        var output = document.createTextNode('Loaded ' + url + '!');
+                        para.appendChild(output);
+                        document.getElementById('output').appendChild(para);
+                    });
+                });
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="in" class="sound"></div>
+        <div id="out" class="sound"></div>
+        
+        <div id="content">
+            <div class="title">Output:</div>
+            <div id="output"></div>
+        
+            <div class="title">Description:</div>
+            Load sound.
+            
+            <div class="title">Result:</div>
+            Output 'Loaded ../../examples/resource/in.wav!' and 'Loaded ../../examples/resource/out.wav!'.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: 7; toolbar: false;">
+            function onload() {
+                $('.sound').each(function() {
+                    var url = '../../examples/resource/' + $(this).attr('id') + '.wav';
+                    $(this).jWebAudio('addSoundSource', {
+                        url: url
+                    });
+                    $(this).jWebAudio('load', function() {
+                        var para = document.createElement('p');
+                        var output = document.createTextNode('Loaded ' + url + '!');
+                        para.appendChild(output);
+                        document.getElementById('output').appendChild(para);
+                    });
+                });
+            }
+            </pre>
+        </div>
+    </body>
+</html>

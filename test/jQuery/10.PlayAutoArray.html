@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            function onload() {
+                var url = {
+                    'in': 'in.wav',
+                    'a': 'a.ogg'
+                };
+                $('.sound').each(function() {
+                    var id = $(this).attr('id');
+                    $(this).jWebAudio('addSoundSource', {
+                        url: '../../examples/resource/' + url[id],
+                        preLoad: true,
+                        callback: function() {
+                            $('#' + id).jWebAudio('play');
+                        }
+                    });
+                });
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="in" class="sound"></div>
+        <div id="a" class="sound"></div>
+        
+        <div id="content">
+            <div class="title">Description:</div>
+            Play array of sounds automatically.
+            
+            <div class="title">Result:</div>
+            Play two sounds at the same time when loaded.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; toolbar: false;">
+            function onload() {
+                var url = {
+                    'in': 'in.wav',
+                    'a': 'a.ogg'
+                };
+                $('.sound').each(function() {
+                    var id = $(this).attr('id');
+                    $(this).jWebAudio('addSoundSource', {
+                        url: '../../examples/resource/' + url[id],
+                        preLoad: true,
+                        callback: function() {
+                            $('#' + id).jWebAudio('play');
+                        }
+                    });
+                });
+            }
+            </pre>
+        </div>
+    </body>
+</html>

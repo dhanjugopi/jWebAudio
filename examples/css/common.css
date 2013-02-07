@@ -1,0 +1,243 @@
+/*
+ * Copyright (C) 2013, Intel Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background-color: #333;
+    color: #D6F7C1;
+    font-family: 'Avant Garde', Verdana;
+    font-size: 18px;
+    min-width: 900px;
+}
+
+a {
+    color: #ECFC00;
+    text-decoration: none;
+}
+
+a:visited {
+    font-style: italic;
+}
+
+li, p {
+    margin: 10px 0px;
+}
+
+.hidden {
+    display: none;
+}
+
+#home {
+    width: 100%;
+}
+
+#titleImg {
+    position: absolute;
+    top: 0px;
+}
+
+#light {
+    background-image: url(../image/light.png);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 200px;
+    background-repeat: x-repeat;
+    z-index: -1;
+}
+
+#sidebar {
+    display: none;
+    position: fixed;
+    right: 0px;
+    top: 200px;
+    margin-left: 20px;
+}
+
+#nav {
+    width: 150px;
+    font-family: 'Abril Fatface', cursive, Helvetica, Arial;
+    font-size: 20px;
+    color: #333;
+    opacity: 0.5;
+}
+
+#nav:hover {
+    opacity: 1.0;
+}
+
+.navBtn {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    
+    background-color: #D50065;
+    
+    padding: 5px 20px;
+    margin: 10px 0px;
+    width: 110px;
+    height: 25px;
+    
+    cursor: pointer;
+}
+
+#toFeatures {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.navBtn:hover {
+    background-color: #ECFC00;
+}
+
+#apiSideBar {
+    width: 200px;
+    position: fixed;
+    top: 60px;
+    display: none;
+    margin-right: 20px;
+    font-family: 'Anaheim', cursive, Helvetica, Arial;
+    font-size: 17px;
+    color: #333;
+    opacity: 0.5;
+    text-align: right;
+}
+
+#apiSideBar:hover {
+    opacity: 1.0;
+}
+
+#apiSideBar > .navBtn {
+    width: 160px;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: #8EEB00;
+    background-color: #333;
+    color: #8EEB00;
+}
+
+#apiSideBar > .navBtn:hover {
+    background-color: #8EEB00;
+    color: #333;
+}
+
+.title {
+    font-family: 'Abril Fatface', 'Times New Roman', Helvetica, Arial;
+    font-size: 45px;
+    color: #8EEB00;
+    margin-top: 40px;
+}
+
+/* first subtitle that next to title */
+.title + .subtitle {
+    margin-top: 0px;
+}
+
+.subtitle {
+    font-family: 'Anaheim', Verdana;
+    font-size: 32px;
+    color: #00BF32;
+    margin-top: 30px;
+    
+    border-style: dashed;
+    border-width: 0px 0px 2px 0px;
+    border-color: #D50065;
+}
+
+#content {
+    width: 600px;
+    margin: 0px auto;
+    margin-bottom: 50px;
+    margin-top: 200px;
+}
+
+#download > .subtitle {
+    margin-bottom: 20px;
+}
+
+#download > .button {
+    border-style: dashed;
+    border-width: 1px;
+    border-color: #8EEB00;
+    color: #8EEB00;
+    
+    font-family: 'Anaheim', Verdana;
+    font-size: 22px;
+    
+    padding: 5px 10px;
+    margin-right: 15px;
+    text-align: center;
+    
+    cursor: pointer;
+    
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#download > .button:hover {
+    border-color: #ECFC00;
+}
+
+.runDemo {
+    font-size: 15px;
+    padding: 5px 10px;
+    margin: 20px 10px 20px 0px;
+    text-decoration: none;
+    
+    background-color: #ECFC00;
+    color: #333;
+    
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.runDemo:hover {
+    background-color: #D50065 !important;
+}
+
+.runDemo:visited {
+    background-color: #ECFC00;
+    color: #333;
+}
+
+.version {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+
+    border-style: dashed;
+    border-width: 1px;
+    border-color: #8EEB00;
+    color: #8EEB00;
+    
+    font-family: 'Anaheim', Verdana;
+    font-size: 22px;
+    font-weight: bold;
+    
+    padding: 5px 20px;
+    margin: 1em 0 0.5em 0;
+    text-align: center;
+    
+    cursor: pointer;
+}
+
+.version:hover {
+    border-color: #ECFC00;
+    color: #ECFC00;
+}

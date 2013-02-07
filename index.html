@@ -1,0 +1,2577 @@
+<html>
+    <head>
+        <script type="text/javascript" src="examples/js/shCore.js"></script>
+        <script type="text/javascript" src="examples/js/shBrushJScript.js"></script>
+        <script type="text/javascript" src="examples/js/shBrushXml.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="build/jquery.jWebAudio.js"></script>
+        <script type="text/javascript" src="examples/js/index.js"></script>
+        
+        
+        <link href="examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <!-- for title font -->
+        <link href='http://fonts.googleapis.com/css?family=Abril+Fatface' rel='stylesheet' type='text/css'>
+        <!-- for subtitle font -->
+        <link href='http://fonts.googleapis.com/css?family=Anaheim' rel='stylesheet' type='text/css'>
+        
+        <link href="examples/css/common.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript">
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    <body>
+        <a href="#" onclick="alert('Sorry, it\'s a private project currently.');">
+            <img style="position: fixed; top: 0; left: 0; border: 0; z-index: 10" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub">
+        </a>
+        
+        <div id="home">
+            <div id="light" class="blink"></div>
+            <img id="titleImg" src="examples/image/title.png" alt="jWebAudio" />
+            <div id="inSound" class="hidden"></div>
+            <div id="outSound" class="hidden"></div>
+        </div>
+        
+        <div id="content">
+            <!--p>jWebAudio is a light-weight <a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html" target="_blank">Web Audio</a> library designed for games.</p>
+            <p>jWebAudio has both jQuery and standard versions, either of which enables you to access the most frequently used features for developing web games without the  need of understanding Web Audio.</p-->
+                
+            <div id="features">
+                <div class="title">Features</div>
+                
+                <div class="subtitle">Web Audio library</div>
+                <p><a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html" target="_blank">Web Audio</a> seeks to process and synthesize audio in web applications. <a href="#download">jWebAudio</a> keeps the technical details of Web Audio under the hood and makes it easier to control your audio.</p>
+                
+                <div class="subtitle">Designed for web games</div>
+                <p>You can find almost everything you need to control audio in web games with <a href="#download">jWebAudio</a>, which provides functions like <a href="#fadeInOut">fade in and fade out</a>, <a href="#loop">loop</a>, <a href="#multishot">multishot</a> for short sound effects like gun shotting and etc.</p>
+                
+                <div class="subtitle">jQuery and standard versions</div>
+                <p><a href="#download">jWebAudio</a> provides both jQuery and standard versions, functionality of which are the same and the difference lies only in the method of calling functions. You may choose either depending on project requirements and person preference.</p>
+                
+                <div class="subtitle">Light-weight</div>
+                <p><a href="#download">jWebAudio</a> focuses on audio control of web games and provides functions that most frequently used in game developing, which makes it a light-weight (<a href="#download">9.0kb</a> for minified standard version) but well-featured audio library.</p>
+                
+                <div class="subtitle">Precise audio control</div>
+                <p>Along with basic audio control like <a href="#play">play</a>, <a href="#pause">pause</a> and <a href="#stop">stop</a>, and settings like <a href="#volume">volume</a>, <a href="#mute">mute</a> and <a href="#loop">loop</a>, <a href="#download">jWebAudio</a> highlights itself with precise audio control. You may <a href="#seek">seek</a> to a specific point and start playing from the exact position.</p>
+                
+                <div class="subtitle">2D and 3D sound effects</div>
+                <p>With jWebAudio, you can add <a href="#effect">sound effects</a> (e.g.: telephonize) in a simple way. And if you want to make your own sound effects, you can achieve this by setting <a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode" target="_blank">Biquad Filter</a> parameters.</p>
+                <p>With <a href="#3d">3D sound effect</a>, you can set parameters like position and velocity of the sound source, making it feel like being in a 3D environment.</p>
+            </div>
+            
+            <div id="download">
+                <div class="title">Download</div>
+                <div class="subtitle">jQuery Version</div>
+                <span class="button"><a href="build/jquery.jWebAudio.js" alt="download original jQuery version jWebAudio" target="_blank">Original: 37.8kb</a></span>
+                <span class="button"><a href="build/jquery.jWebAudio.min.js" alt="download minified jQuery version jWebAudio" target="_blank">Minified: 12.9kb</a></span>
+                
+                <div class="subtitle">Standard Version</div>
+                <span class="button"><a href="build/standard.jWebAudio.js" alt="download original standard version jWebAudio" target="_blank">Original: 23.7kb</a></span>
+                <span class="button"><a href="build/standard.jWebAudio.min.js" alt="download minified standard version jWebAudio" target="_blank">Minified: 9.0kb</a></span>
+            </div>
+            
+            <div id="examples">
+                <div class="title">Examples</div>
+                
+                <div class="subtitle">Add sound source</div>
+                <p>This tells our library the location of the audio to be played without actually load it into memory. </p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/01.AddSoundSource.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg'
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/01.AddSoundSource.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg'
+                        });
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Add multi sound sources</div>
+                <p>Add array of sound sources in standard version and add sound sources with the same class in jQuery version. </p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/02.AddSoundSourcesArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        // jQuery version stores one sound in each
+                        // element, so url cannot be an array of 
+                        // string
+                        $('.sound').each(function() {
+                            $(this).jWebAudio('addSoundSource', {
+                                'url': '../../examples/resource/' +
+                                       $(this).attr('id') + '.wav'
+                            });
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/02.AddSoundSourcesArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': ['../../examples/resource/in.wav',
+                                '../../examples/resource/out.wav']
+                        });
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Load sound source</div>
+                <p>If you wish to control when to load the audio into memory, <a href="#load">load</a> function should be called.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/03.Load.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg'
+                        });
+                        $('#audio').jWebAudio('load', function() {
+                            alert('Loaded!');
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/03.Load.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg'
+                        });
+                        source.load(function() {
+                            alert('Loaded!');
+                        });
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Load array</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/04.LoadArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('.sound').each(function() {
+                            var url = '../../examples/resource/' + $(this).attr('id') + '.wav';
+                            $(this).jWebAudio('addSoundSource', {
+                                url: url
+                            });
+                            $(this).jWebAudio('load', function() {
+                                var para = document.createElement('p');
+                                var output = document.createTextNode('Loaded ' + url + '!');
+                                para.appendChild(output);
+                                document.getElementById('output').appendChild(para);
+                            });
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/04.LoadArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var sources = null;
+                    
+                    function onload() {
+                        var urls = ['../../examples/resource/in.wav',
+                                    '../../examples/resource/out.wav'];
+                        var engine = new jWebAudio.SoundEngine();
+                        sources = engine.addSoundSource({
+                            'url': urls
+                        });
+                        for (var i in sources) {
+                            sources[i].load(function(url) {
+                                return function() {
+                                    var para = document.createElement('p');
+                                    var output = document.createTextNode('Loaded ' + url + '!');
+                                    para.appendChild(output);
+                                    document.getElementById('output').appendChild(para);
+                                };
+                            }(urls[i]));
+                        }
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">PreLoad</div>
+                <p><a href="#preload">PreLoad</a> the sound when add sound source.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/05.PreLoad.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                alert('Loaded!');
+                            }
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/05.PreLoad.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                alert('Loaded!');
+                            }
+                        });
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">PreLoad array</div>
+                <p>PreLoad two sound sources when add sound source.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/06.PreLoadArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('.sound').each(function() {
+                            var url = '../../examples/resource/' + $(this).attr('id') + '.wav';
+                            $(this).jWebAudio('addSoundSource', {
+                                url: url,
+                                preLoad: true,
+                                callback: function() {
+                                    var para = document.createElement('p');
+                                    var output = document.createTextNode('Loaded ' + url + '!');
+                                    para.appendChild(output);
+                                    document.getElementById('output').appendChild(para);
+                                }
+                            });
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/06.PreLoadArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': ['../../examples/resource/in.wav',
+                                    '../../examples/resource/out.wav'],
+                            'preLoad': true,
+                            'callback': function() {
+                                alert('Loaded both!');
+                            }
+                        });
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Play</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/07.Play.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg'
+                        });
+                    }
+                    
+                    function play() {
+                        $('#audio').jWebAudio('load', function() {
+                            $('#audio').jWebAudio('play');
+                        });
+                        $('#btn')[0].disabled = true;
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/07.Play.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg'
+                        });
+                    }
+                    
+                    function play() {
+                        source.load(function() {
+                            source.sound.play();
+                        });
+                        document.getElementById('btn').disabled = true;
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Play automatically</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/08.PlayAuto.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                            }
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/08.PlayAuto.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                            }
+                        });
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Play array</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/09.PlayArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('.sound').each(function() {
+                            var url = '../../examples/resource/' + $(this).attr('id') + '.wav';
+                            $(this).jWebAudio('addSoundSource', {
+                                url: url,
+                                preLoad: true
+                            });
+                        });
+                    }
+                    
+                    function onPlayA() {
+                        $('#in').jWebAudio('play');
+                        $('#playA')[0].disabled = true;
+                    }
+                    
+                    function onPlayB() {
+                        $('#out').jWebAudio('play');
+                        $('#playB')[0].disabled = true;
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/09.PlayArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var sources = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        sources = engine.addSoundSource({
+                            'url': ['../../examples/resource/in.wav',
+                                    '../../examples/resource/out.wav'],
+                            'preLoad': true
+                        });
+                    }
+                    
+                    function onPlayA() {
+                        sources[0].sound.play();
+                        document.getElementById('playA').disabled = true;
+                    }
+                    
+                    function onPlayB() {
+                        sources[1].sound.play();
+                        document.getElementById('playB').disabled = true;
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Play array automatically</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/10.PlayAutoArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var url = {
+                            'in': 'in.wav',
+                            'a': 'a.ogg'
+                        };
+                        $('.sound').each(function() {
+                            var id = $(this).attr('id');
+                            $(this).jWebAudio('addSoundSource', {
+                                url: '../../examples/resource/' + url[id],
+                                preLoad: true,
+                                callback: function() {
+                                    $('#' + id).jWebAudio('play');
+                                }
+                            });
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/10.PlayAutoArray.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var sources = engine.addSoundSource({
+                            'url': ['../../examples/resource/in.wav',
+                                    '../../examples/resource/a.ogg'],
+                            'preLoad': true,
+                            'callback': function() {
+                                for (var i in sources) {
+                                    sources[i].sound.play();
+                                }
+                            }
+                        });
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Pause</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/11.Pause.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    
+                    var playing = false;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                playing = true;
+                                document.getElementById('btn').disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function play() {
+                        if (playing) {
+                            // pause
+                            document.getElementById('btn').innerHTML = 'Play';
+                            source.sound.pause();
+                        } else {
+                            // play
+                            document.getElementById('btn').innerHTML = 'Pause';
+                            source.sound.play();
+                        }
+                        playing = !playing;
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/11.Pause.html" target="_blank">Run</a>
+                    <pre class="brush: js; highlight: 22; toolbar: false;">
+                    var source = null;
+                    
+                    var playing = false;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                playing = true;
+                                document.getElementById('btn').disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function play() {
+                        if (playing) {
+                            // pause
+                            document.getElementById('btn').innerHTML = 'Play';
+                            source.sound.pause();
+                        } else {
+                            // play
+                            document.getElementById('btn').innerHTML = 'Pause';
+                            source.sound.play();
+                        }
+                        playing = !playing;
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Stop</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/12.Stop.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var playing = false;
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                playing = true;
+                                $('#btn')[0].disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function play() {
+                        if (playing) {
+                            // pause
+                            $('#btn').text('Play');
+                            $('#audio').jWebAudio('stop');
+                        } else {
+                            // play
+                            $('#btn').text('Stop');
+                            $('#audio').jWebAudio('play');
+                        }
+                        playing = !playing;
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/12.Stop.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+            
+                    var playing = false;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                playing = true;
+                                document.getElementById('btn').disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function play() {
+                        if (playing) {
+                            // stop
+                            document.getElementById('btn').innerHTML = 'Play';
+                            source.sound.stop();
+                        } else {
+                            // play
+                            document.getElementById('btn').innerHTML = 'Stop';
+                            source.sound.play();
+                        }
+                        playing = !playing;
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Change volume</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/13.Volime.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {   
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                $('#volume')[0].disabled = false;
+                            },
+                            'volume': 50
+                        });
+                    }
+                    
+                    function volumeChange() {
+                        var vol = $('#volume')[0].value;
+                        // set volume
+                        $('#audio').jWebAudio('options', {
+                            volume: parseInt(vol)
+                        });
+                        // get volume
+                        $('#output').text($('#audio').jWebAudio('options').volume);
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/13.Volime.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                document.getElementById('volume').disabled = false;
+                            },
+                            'volume': 50
+                        });
+                    }
+                    
+                    function volumeChange() {
+                        var vol = document.getElementById('volume').value;
+                        // set volume
+                        source.sound.setVolume(parseInt(vol));
+                        // get volume
+                        document.getElementById('output').innerHTML = 
+                                source.sound.getVolume();
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Set mute</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/14.Mute.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var muted = false;
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                playing = true;
+                                $('#btn')[0].disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function mute() {
+                        if (muted) {
+                            // set unmuted
+                            $('#btn').text('Mute');
+                            $('#audio').jWebAudio('options', {
+                                muted: false
+                            })
+                        } else {
+                            // set muted
+                            $('#btn').text('Unmute');
+                            $('#audio').jWebAudio('options', {
+                                muted: true
+                            })
+                        }
+                        muted = $('#audio').jWebAudio('options').muted;
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/14.Mute.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    
+                    var muted = false;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                document.getElementById('btn').disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function mute() {
+                        if (muted) {
+                            // set unmuted
+                            document.getElementById('btn').innerHTML = 'Mute';
+                            source.sound.setMuted(false);
+                        } else {
+                            // set muted
+                            document.getElementById('btn').innerHTML = 'Unmute';
+                            source.sound.setMuted(true);
+                        }
+                        muted = source.sound.getMuted();
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Set loop</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/15.Loop.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/in.wav',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                            },
+                            'loop': true
+                        });
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/15.Loop.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': '../../examples/resource/in.wav',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                            },
+                            'loop': true
+                        });
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Seek position to play</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/16.Seek.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                
+                                duration = $('#audio').jWebAudio('duration');
+                                $('#totalSpan').text(Math.ceil(duration));
+                                
+                                $('#posInput')[0].disabled = false;
+                                
+                                // update position 10 times per second
+                                setInterval(updatePos, 100);
+                            }
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min($('#posInput')[0]
+                                .value / 100 * duration, duration);
+                        // set position
+                        $('#audio').jWebAudio('seek', pos);
+                    }
+                    
+                    function updatePos() {
+                        // get position
+                        var pos = $('#audio').jWebAudio('seek');
+                        $('#posInput')[0].value = pos / duration * 100;
+                        $('#posSpan').text(Math.ceil(pos));
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/16.Seek.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                
+                                duration = source.sound.duration;
+                                document.getElementById('totalSpan').innerHTML = Math.ceil(duration);
+                                
+                                document.getElementById('posInput').disabled = false;
+                                
+                                // update position 10 times per second
+                                setInterval(updatePos, 100);
+                            }
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min(document.getElementById('posInput')
+                                .value / 100 * duration, duration);
+                        // set position
+                        source.sound.seek(pos);
+                    }
+                    
+                    function updatePos() {
+                        var pos = source.sound.offset;
+                        document.getElementById('posInput').value = pos / duration * 100;
+                        document.getElementById('posSpan').innerHTML = Math.ceil(pos);
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Multishot play</div>
+                <p>Short audio like gun-shooting sound may be played another time before one is ended. Rather than making more than one instance of audio, <a href="#multishot">multishot</a> enables you to play multi-times in a short period.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/17.MultishotPlay.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/in.wav',
+                            'multishot': true,
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#btn')[0].disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function play() {
+                        $('#audio').jWebAudio('play');
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/17.MultishotPlay.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/in.wav',
+                            'multishot': true,
+                            'preLoad': true,
+                            'callback': function() {
+                                document.getElementById('btn').disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function play() {
+                        source.sound.play();
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Multishot stop</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/18.MultishotStop.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'multishot': true,
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#playBtn')[0].disabled = false;
+                                $('#stopBtn')[0].disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function play() {
+                        $('#audio').jWebAudio('play');
+                    }
+                    
+                    function stop() {
+                        $('#audio').jWebAudio('stop');
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/18.MultishotStop.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'multishot': true,
+                            'preLoad': true,
+                            'callback': function() {
+                                document.getElementById('playBtn').disabled = false;
+                                document.getElementById('stopBtn').disabled = false;
+                            }
+                        });
+                    }
+                    
+                    function play() {
+                        source.sound.play();
+                    }
+                    
+                    function stop() {
+                        source.sound.stop();
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Sound effect</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/19.SoundEffect.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'multishot': true,
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                            }
+                        });
+                    }
+                    
+                    var teleId = null;
+                    function teleClick() {
+                        if ($('#teleInput')[0].checked) {
+                            teleId = $('#audio').jWebAudio('addEffect', 'telephonize');
+                            $('#clearBtn')[0].enabled = true;
+                        } else if (teleId !== null) {
+                            $('#audio').jWebAudio('deleteEffect', teleId);
+                        }
+                    }
+                    
+                    var cathId = null;
+                    function cathClick() {
+                        if ($('#cathInput')[0].checked) {
+                            cathId = $('#audio').jWebAudio('addEffect', 'cathedral');
+                            $('#clearBtn')[0].enabled = true;
+                        } else if (cathId !== null) {
+                            $('#audio').jWebAudio('deleteEffect', cathId);
+                        }
+                    }
+                    
+                    function clearAll() {
+                        $('#audio').jWebAudio('clearAllEffects');
+                        $('#cathInput')[0].checked = false;
+                        $('#teleInput')[0].checked = false;
+                        $('#clearBtn')[0].enabled = false;
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/19.SoundEffect.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var sound = null;
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                sound = source.sound;
+                                sound.play();
+                            }
+                        });
+                    }
+                    
+                    var teleId = null;
+                    function teleClick() {
+                        if (document.getElementById('teleInput').checked) {
+                            teleId = sound.addEffect('telephonize');
+                        } else if (teleId !== null) {
+                            sound.deleteEffect(teleId);
+                        }
+                    }
+                    
+                    var cathId = null;
+                    function cathClick() {
+                        if (document.getElementById('cathInput').checked) {
+                            cathId = sound.addEffect('cathedral');
+                        } else if (cathId !== null) {
+                            sound.deleteEffect(cathId);
+                        }
+                    }
+                    
+                    function clearAll() {
+                        sound.clearAllEffects();
+                        document.getElementById('cathInput').checked = false;
+                        document.getElementById('teleInput').checked = false;
+                        document.getElementById('clearBtn').enabled = false;
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Sound effects</div>
+                <p>Create new sound effects using the combination of LOWPASS, HIGHPASS, BANDPASS, LOWSHELF, HIGHSHELF, PEAKING, NOTCH, ALLPASS.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/20.SoundEffectDefine.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                            }
+                        });
+                    }
+                    
+                    var useEffect = false;
+                    var id = null;
+                    function toggleEffect() {
+                        useEffect = !useEffect;
+                        if (useEffect) {
+                            id = $('#audio').jWebAudio('addEffect', {
+                                name: 'myEffect', 
+                                options: [{
+                                    "type": jWebAudio.Filter.prototype.LOWPASS,
+                                    "frequency": 1000.0
+                                }, {
+                                    "type": jWebAudio.Filter.prototype.HIGHPASS,
+                                    "frequency": 500.0
+                                }]
+                            });
+                        } else if (id !== null) {
+                            $('#audio').jWebAudio('deleteEffect', id);
+                        }
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/20.SoundEffectDefine.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                            }
+                        });
+                    }
+                    
+                    var useEffect = false;
+                    var id = null;
+                    function toggleEffect() {
+                        useEffect = !useEffect;
+                        if (useEffect) {
+                            id = source.sound.addEffect(new jWebAudio.Filter(
+                                'myEffect', 
+                                [{
+                                    "type": jWebAudio.Filter.prototype.LOWPASS,
+                                    "frequency": 1000.0
+                                }, {
+                                    "type": jWebAudio.Filter.prototype.HIGHPASS,
+                                    "frequency": 500.0
+                                }]
+                            ));
+                        } else if (id !== null) {
+                            source.sound.deleteEffect(id);
+                        }
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">3D Sound effect</div>
+                <p>3D sound effect enables you to set the position of sound source to listener.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/21.3dSound.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                            }
+                        });
+                    }
+                    
+                    var useEffect = false;
+                    var id = null;
+                    function toggleEffect() {
+                        useEffect = !useEffect;
+                        if (useEffect) {
+                            id = $('#audio').jWebAudio('addEffect', '3d');
+                        } else if (id !== null) {
+                            $('#audio').jWebAudio('deleteEffect', id);
+                        }
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/21.3dSound.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                            }
+                        });
+                    }
+                    
+                    var useEffect = false;
+                    var id = null;
+                    function toggleEffect() {
+                        useEffect = !useEffect;
+                        if (useEffect) {
+                            id = source.sound.addEffect('3d');
+                        } else if (id !== null) {
+                            source.sound.deleteEffect(id);
+                        }
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Set 3D Sound effect position</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/22.3dSoundPosition.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var effect = null;
+                    var pos = {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    };
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                var id = $('#audio').jWebAudio('addEffect', '3d');
+                                effect = $('#audio').jWebAudio('getEffect', id);
+                                
+                                // enable UI
+                                $('input').each(function() {
+                                    $(this)[0].disabled = false;
+                                });
+                            }
+                        });
+                    }
+                    
+                    function xChange() {
+                        var x = $('#xInput')[0].value;
+                        $('xLabel').text(x);
+                        pos.x = parseInt(x);
+                        effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+                    }
+                    
+                    function yChange() {
+                        var y = $('#yInput')[0].value;
+                        $('xLabel').text(y);
+                        pos.y = parseInt(y);
+                        effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+                    }
+                    
+                    function zChange() {
+                        var z = $('#zInput')[0].value;
+                        $('zLabel').text(z);
+                        pos.z = parseInt(z);
+                        effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+                    }
+
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/22.3dSoundPosition.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    var effect = null;
+                    var pos = {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    };
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                var id = source.sound.addEffect('3d');
+                                effect = source.sound.getEffect(id);
+                                
+                                // enable UI
+                                var input = document.getElementsByTagName('input');
+                                for (var i in input) {
+                                    input[i].disabled = false;
+                                }
+                            }
+                        });
+                    }
+                    
+                    function xChange() {
+                        var x = document.getElementById('xInput').value;
+                        document.getElementById('xLabel').innerHTML = x;
+                        pos.x = parseInt(x);
+                        effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+                    }
+                    
+                    function yChange() {
+                        var y = document.getElementById('yInput').value;
+                        document.getElementById('yLabel').innerHTML = y;
+                        pos.y = parseInt(y);
+                        effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+                    }
+                    
+                    function zChange() {
+                        var z = document.getElementById('zInput').value;
+                        document.getElementById('zLabel').innerHTML = z;
+                        pos.z = parseInt(z);
+                        effect.soundObject.setPosition(pos.x, pos.y, pos.z);
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Set 3D Sound effect velocity</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/23.3dSoundVelocity.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var effect = null;
+                    var v = {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    };
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                var id = $('#audio').jWebAudio('addEffect', '3d');
+                                effect = $('#audio').jWebAudio('getEffect', id);
+                                
+                                // enable UI
+                                $('input').each(function() {
+                                    $(this)[0].disabled = false;
+                                });
+                            }
+                        });
+                    }
+                    
+                    function xChange() {
+                        var x = $('#xInput')[0].value;
+                        $('#xLabel').text(x);
+                        v.x = parseFloat(x);
+                        effect.soundObject.setVelocity(v.x, v.y, v.z);
+                    }
+                    
+                    function yChange() {
+                        var y = $('#yInput')[0].value;
+                        $('#xLabel').text(y);
+                        v.y = parseFloat(y);
+                        effect.soundObject.setVelocity(v.x, v.y, v.z);
+                    }
+                    
+                    function zChange() {
+                        var z = $('#zInput')[0].value;
+                        $('#zLabel').text(z);
+                        v.z = parseFloat(z);
+                        effect.soundObject.setVelocity(v.x, v.y, v.z);
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/23.3dSoundVelocity.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    var effect = null;
+                    var v = {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    };
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                var id = source.sound.addEffect('3d');
+                                effect = source.sound.getEffect(id);
+                                
+                                // enable UI
+                                var input = document.getElementsByTagName('input');
+                                for (var i in input) {
+                                    input[i].disabled = false;
+                                }
+                            }
+                        });
+                    }
+                    
+                    function xChange() {
+                        var x = document.getElementById('xInput').value;
+                        document.getElementById('xLabel').innerHTML = x;
+                        v.x = parseFloat(x);
+                        effect.soundObject.setVelocity(v.x, v.y, v.z);
+                    }
+                    
+                    function yChange() {
+                        var y = document.getElementById('yInput').value;
+                        document.getElementById('yLabel').innerHTML = y;
+                        v.y = parseFloat(y);
+                        effect.soundObject.setVelocity(v.x, v.y, v.z);
+                    }
+                    
+                    function zChange() {
+                        var z = document.getElementById('zInput').value;
+                        document.getElementById('zLabel').innerHTML = z;
+                        v.z = parseFloat(z);
+                        effect.soundObject.setVelocity(v.x, v.y, v.z);
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Finish event</div>
+                <p>Finish event function is the one to be called when sound plays to the end.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/24.FinishEvent.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                
+                                duration = $('#audio').jWebAudio('duration');
+                                $('#totalSpan').text(Math.ceil(duration));
+                                
+                                $('#posInput')[0].disabled = false;
+                                
+                                // update position 10 times per second
+                                setInterval(updatePos, 100);
+                            },
+                            'finish': function() {
+                                alert('Finished!');
+                                $('#posInput')[0].disabled = true;
+                            }
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min($('#posInput')[0]
+                                .value / 100 * duration, duration);
+                        // set position
+                        $('#audio').jWebAudio('seek', pos);
+                    }
+                    
+                    function updatePos() {
+                        // get position
+                        var pos = $('#audio').jWebAudio('seek');
+                        $('#posInput')[0].value = pos / duration * 100;
+                        $('#posSpan').text(Math.ceil(pos));
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/24.FinishEvent.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                
+                                duration = source.sound.duration;
+                                document.getElementById('totalSpan').innerHTML = Math.ceil(duration);
+                                
+                                document.getElementById('posInput').disabled = false;
+                                
+                                // update position 10 times per second
+                                setInterval(updatePos, 100);
+                            },
+                            'finish': function() {
+                                alert('Finished!');
+                                document.getElementById('posInput').disabled = true;
+                            }
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min(document.getElementById('posInput')
+                                .value / 100 * duration, duration);
+                        // set position
+                        source.sound.seek(pos);
+                    }
+                    
+                    function updatePos() {
+                        var pos = source.sound.offset;
+                        document.getElementById('posInput').value = pos / duration * 100;
+                        document.getElementById('posSpan').innerHTML = Math.ceil(pos);
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Set finish event</div>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/25.FinishEventSet.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                
+                                duration = $('#audio').jWebAudio('duration');
+                                $('#totalSpan').text(Math.ceil(duration));
+                                
+                                $('#posInput')[0].disabled = false;
+                                
+                                // update position 10 times per second
+                                setInterval(updatePos, 100);
+                            }
+                        });
+                        $('#audio').jWebAudio('finish', function() {
+                            alert('Finished!');
+                            $('#posInput')[0].disabled = true;
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min($('#posInput')[0]
+                                .value / 100 * duration, duration);
+                        // set position
+                        $('#audio').jWebAudio('seek', pos);
+                    }
+                    
+                    function updatePos() {
+                        // get position
+                        var pos = $('#audio').jWebAudio('seek');
+                        $('#posInput')[0].value = pos / duration * 100;
+                        $('#posSpan').text(Math.ceil(pos));
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/25.FinishEventSet.html" target="_blank">Run</a>
+                    <pre class="brush: js; toolbar: false;">
+                    var source = null;
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                
+                                duration = source.sound.duration;
+                                document.getElementById('totalSpan').innerHTML = Math.ceil(duration);
+                                
+                                document.getElementById('posInput').disabled = false;
+                                
+                                // update position 10 times per second
+                                setInterval(updatePos, 100);
+                            }
+                        });
+                        source.finish = function() {
+                            alert('Finished!');
+                            document.getElementById('posInput').disabled = true;
+                        };
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min(document.getElementById('posInput')
+                                .value / 100 * duration, duration);
+                        // set position
+                        source.sound.seek(pos);
+                    }
+                    
+                    function updatePos() {
+                        var pos = source.sound.offset;
+                        document.getElementById('posInput').value = pos / duration * 100;
+                        document.getElementById('posSpan').innerHTML = Math.ceil(pos);
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Fade in and out</div>
+                <p>Sound fade in and fade out effect when play, stop and play to the end.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/26.FadeInOut.html" target="_blank">Run</a>
+                    <pre class="brush: js; highlight: [23, 24, 25]; toolbar: false;">
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                
+                                duration = $('#audio').jWebAudio('duration');
+                                $('#totalSpan').text(Math.ceil(duration));
+                                
+                                $('#posInput')[0].disabled = false;
+                                
+                                playing = true;
+                                $('#btn')[0].disabled = false;
+                                
+                                // update position 10 times per second
+                                setInterval(updatePos, 100);
+                            },
+                            'loop': true,
+                            'fadeIn': true,
+                            'fadeOut': true,
+                            'fadeInTime': 5
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min($('#posInput')[0]
+                                .value / 100 * duration, duration);
+                        // set position
+                        $('#audio').jWebAudio('seek', pos);
+                    }
+                    
+                    function updatePos() {
+                        // get position
+                        var pos = $('#audio').jWebAudio('seek');
+                        $('#posInput')[0].value = pos / duration * 100;
+                        $('#posSpan').text(Math.ceil(pos));
+                    }
+                    
+                    function play() {
+                        if (playing) {
+                            // pause
+                            $('#btn').text('Play');
+                            $('#audio').jWebAudio('stop');
+                        } else {
+                            // play
+                            $('#btn').text('Stop');
+                            $('#audio').jWebAudio('play');
+                        }
+                        playing = !playing;
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/26.FadeInOut.html" target="_blank">Run</a>
+                    <pre class="brush: js; highlight: [27, 28, 29]; toolbar: false;">
+                    var source = null;
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    var playing = false;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                
+                                duration = source.sound.duration;
+                                document.getElementById('totalSpan').innerHTML = Math.ceil(duration);
+                                
+                                document.getElementById('posInput').disabled = false;
+                                
+                                playing = true;
+                                document.getElementById('btn').disabled = false;
+                                
+                                // update position once per second
+                                setInterval(updatePos, 1000);
+                            },
+                            'loop': true,
+                            'fadeIn': true,
+                            'fadeOut': true,
+                            'fadeInTime': 5
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min(document.getElementById('posInput')
+                                .value / 100 * duration, duration);
+                        // set position
+                        source.sound.seek(pos);
+                    }
+                    
+                    function updatePos() {
+                        var pos = source.sound.offset;
+                        //console.log(pos);
+                        document.getElementById('posInput').value = pos / duration * 100;
+                        document.getElementById('posSpan').innerHTML = Math.ceil(pos);
+                    }
+                    
+                    function play() {
+                        if (playing) {
+                            // stop
+                            document.getElementById('btn').innerHTML = 'Play';
+                            source.sound.stop();
+                        } else {
+                            // play
+                            document.getElementById('btn').innerHTML = 'Stop';
+                            source.sound.play();
+                        }
+                        playing = !playing;
+                    }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Set fade in and out</div>
+                <p>No sound effect when first play, because fade in is not set then. Fade in effect when seek and fade out effect when stop or plays to the end.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <a href="test/jQuery/27.FadeInOutSet.html" target="_blank">Run</a>
+                    <pre class="brush: js; highlight: [23, 24, 25]; toolbar: false;">
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    function onload() {
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#audio').jWebAudio('play');
+                                
+                                duration = $('#audio').jWebAudio('duration');
+                                $('#totalSpan').text(Math.ceil(duration));
+                                
+                                $('#posInput')[0].disabled = false;
+                                
+                                playing = true;
+                                $('#btn')[0].disabled = false;
+                                
+                                // update position 10 times per second
+                                setInterval(updatePos, 100);
+                                
+                                $('#audio').jWebAudio('options', {
+                                    'fadeIn': true,
+                                    'fadeInTime': 5,
+                                    'fadeOut': true
+                                });
+                            },
+                            'loop': true
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min($('#posInput')[0]
+                                .value / 100 * duration, duration);
+                        // set position
+                        $('#audio').jWebAudio('seek', pos);
+                    }
+                    
+                    function updatePos() {
+                        // get position
+                        var pos = $('#audio').jWebAudio('seek');
+                        $('#posInput')[0].value = pos / duration * 100;
+                        $('#posSpan').text(Math.ceil(pos));
+                    }
+                    
+                    function play() {
+                        if (playing) {
+                            // pause
+                            $('#btn').text('Play');
+                            $('#audio').jWebAudio('stop');
+                        } else {
+                            // play
+                            $('#btn').text('Stop');
+                            $('#audio').jWebAudio('play');
+                        }
+                        playing = !playing;
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <a href="test/standard/27.FadeInOutSet.html" target="_blank">Run</a>
+                    <pre class="brush: js; highlight: [27, 29]; toolbar: false;">
+                    var source = null;
+                    // duration is the length of sound, in seconds
+                    var duration = null;
+                    
+                    var playing = false;
+                    
+                    function onload() {
+                        var engine = new jWebAudio.SoundEngine();
+                        source = engine.addSoundSource({
+                            'url': '../../examples/resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                source.sound.play();
+                                
+                                duration = source.sound.duration;
+                                document.getElementById('totalSpan').innerHTML = Math.ceil(duration);
+                                
+                                document.getElementById('posInput').disabled = false;
+                                
+                                playing = true;
+                                document.getElementById('btn').disabled = false;
+                                
+                                // update position once per second
+                                setInterval(updatePos, 1000);
+                                
+                                // set fade here
+                                source.sound.setFadeIn(true, 5);
+                                // use default fading time, which is 3
+                                source.sound.setFadeOut(true); 
+                            },
+                            'loop': true
+                        });
+                    }
+                    
+                    function posChange() {
+                        var pos = Math.min(document.getElementById('posInput')
+                                .value / 100 * duration, duration);
+                        // set position
+                        source.sound.seek(pos);
+                    }
+                    
+                    function updatePos() {
+                        var pos = source.sound.offset;
+                        //console.log(pos);
+                        document.getElementById('posInput').value = pos / duration * 100;
+                        document.getElementById('posSpan').innerHTML = Math.ceil(pos);
+                    }
+                    
+                    function play() {
+                        if (playing) {
+                            // stop
+                            document.getElementById('btn').innerHTML = 'Play';
+                            source.sound.stop();
+                        } else {
+                            // play
+                            document.getElementById('btn').innerHTML = 'Stop';
+                            source.sound.play();
+                        }
+                        playing = !playing;
+                    }
+                    </pre>
+                </div>
+                
+            </div><!-- End of examples -->
+            
+            <div id="demo">
+                <div class="title">Demo</div>
+                
+                <div class="subtitle">Getting Started</div>
+                <p><a class="runDemo" target="_blank" href="examples/01_PlaySound.html">Run jQuery version</a>
+                <a class="runDemo" target="_blank" href="examples/11_PlaySound.html">Run standard version</a></p>
+                <p>jquery.js and jquery.jWebAudio.js should always be included to use the jQuery version.</p>
+                <p>While standard.jWebAudio.js alone should be included to use the standard version.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; highlight: 5; toolbar: false;">
+                        $('#div1').jWebAudio('addSoundSource', {
+                            'url': 'resource/a.ogg',
+                            'preLoad': true,
+                            'callback': function() {
+                                $('#div1').jWebAudio('play');
+                            }
+                        });
+                    </pre>
+                    <p>Which has the same effect as the following.</p>
+                    <pre class="brush: js; highlight: 5; toolbar: false;">
+                    $('#div1').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg'
+                    });
+                    $('#div1').jWebAudio('load', function() {
+                        $('#div1').jWebAudio('play');
+                    });
+                    </pre>
+                    <p>jWebAudio of jQuery version maintains chainability as jQuery does. So you may call the above functions in this way and will get all the same results.</p>
+                    <pre class="brush: js; highlight: 4; toolbar: false;">
+                    $('#div1').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg'
+                    }).jWebAudio('load', function() {
+                        $('#div1').jWebAudio('play');
+                    });
+                    </pre>
+                
+                </div>
+                
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight: 8; toolbar: false;">
+                        function onload() {
+                            var engine = new jWebAudio.SoundEngine();
+                            var source = engine.addSoundSource({
+                                'url': 'resource/a.ogg'
+                            });
+                            source.load(function() {
+                                /* Play sound instantly */
+                                source.sound.play();
+                            });
+                        }
+                    </pre>
+                </div>
+                
+                <div class="subtitle">Music Player</div>
+                <p><a class="runDemo" target="_blank" href="examples/02_MusicPlayer.html">Run jQuery version</a></p>
+                <p>When audio control has something to do with UI control panel, as the example of Music Player shows, jQuery version is more preferable.</p>
+                
+                <div class="subtitle">Sound Effects</div>
+                <p>
+                    <a class="runDemo" target="_blank" href="examples/03_SoundEffect.html">Run jQuery version</a>
+                    <a class="runDemo" target="_blank" href="examples/13_SoundEffect.html">Run standard version</a>
+                </p>
+                <p>Multiple sound effects can be added to audio. This demo shows how to toggle telephonized sound effect.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; highlight: [15, 16, 18, 19]; toolbar: false;">
+                        $(document).ready(function() {
+                            $('#div1').jWebAudio('addSoundSource', {
+                                'url': 'resource/a.ogg',
+                                'preLoad': true,
+                                'callback': function() {
+                                    $('#div1').jWebAudio('play');
+                                }
+                            });
+                            
+                            var useEffect = false;
+                            var id = null;
+                            $('#effectBtn').click(function() {
+                                useEffect = !useEffect;
+                                if (useEffect) {
+                                    id = $('#div1').jWebAudio('addEffect', 
+                                            'telephonize');
+                                } else if (id !== null) {
+                                    $('#div1').jWebAudio('deleteEffect', 
+                                            id);
+                                }
+                            });
+                        });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight: [15, 16, 18]; toolbar: false;">
+                        var source = null;
+                        function onload() {
+                            var engine = new jWebAudio.SoundEngine();
+                            source = engine.addSoundSource({
+                                'url': 'resource/a.ogg'
+                            });
+                            source.sound.play();
+                        }
+                        
+                        var useEffect = false;
+                        var id = null;
+                        function toggleEffect() {
+                            useEffect = !useEffect;
+                            if (useEffect) {
+                                id = source.sound
+                                        .addEffect('telephonize');
+                            } else if (id !== null) {
+                                source.sound.deleteEffect(id);
+                            }
+                        }
+                    </pre>
+                </div>
+            </div><!-- End of demo -->
+            
+            <div id="api">
+                <div class="title">API</div>
+                
+                <!----------- Add Sound Source ----------->
+                <div class="subtitle" id="addSoundSource">Add Sound Source</div>
+                <p>This tells our library the location of the audio to be played without actually load it into memory. </p>
+                <p>If <a href="#preLoad">preLoad</a> is set to be true, the audio will be loaded instantly when added. Otherwise, it won't be loaded until <a href="#load">load</a> is called or the first time <a href="#play">play</a> is called.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <p>API:</p>
+                    <pre class="brush: js; toolbar: false;">
+                        $(...).jWebAudio('addSoundSource', {
+                            'url': ...,         // string
+                            'preLoad': ...,     // boolean, optional (default false)
+                            'callback': ...,    // function, optional, only useful if preLoad is true
+                            'multishot': ...,   // boolean, optional (default false)
+                            'loop': ...,        // boolean, optional (default false)
+                            'muted': ...,       // boolean, optional (dafault false)
+                            'volume': ...,      // integer, optional (default 100)
+                            'finish': ...       // function, optional, function to be called when 
+                                                // sound plays to the end
+                        });
+                    </pre>
+                    <p>Example:</p>
+                    <pre class="brush: js; toolbar: false;">
+                    /* Create sound to be used later */
+                    $('#audio').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg',
+                        'volume': 90
+                    });
+                    </pre>
+                </div>
+                
+                <div class="version">Standard Version</div>
+                <div>
+                    <p>API:</p>
+                    <pre class="brush: js; toolbar: false;">
+                    /* SoundEngine stores all sounds instances and works like a factory */
+                    var engine = new jWebAudio.SoundEngine();
+                    /* addSoundSource returns instance of source */
+                    var source = engine.addSoundSource({
+                        'url': ...,         // string or array of strings
+                        'preLoad': ...,     // boolean, optional (default false)
+                        'callback': ...,    // function, optional, only useful if preLoad is true
+                        'multishot': ...,   // boolean, optional (default false)
+                        'loop': ...,        // boolean, optional (default false)
+                        'muted': ...,       // boolean, optional (dafault false)
+                        'volume': ...,      // integer, optional (default 100)
+                        'finish': ...       // function, optional, function to be called when 
+                                            // sound plays to the end
+                    });
+                    </pre>
+                    <p>Example:</p>
+                    <pre class="brush: js; toolbar: false;">
+                    var engine = new jWebAudio.SoundEngine();
+                    var source = engine.addSoundSource({
+                        'url': 'resource/a.ogg',
+                        'volume': 90
+                    });
+                    </pre>
+                </div>
+                    
+                <p>In standard version, you can add more than one sound source in one command. But since every element in jQuery version contains a sound source, you cannot add more than one sound source in jQuery version.</p>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight: [3, 4]; toolbar: false;">
+                        var engine = new jWebAudio.SoundEngine();
+                        var sources = engine.addSoundSource({
+                            'url': ['resource/in.wav',
+                                    'resource/out.wav'],
+                            'volume': 90
+                        });
+                    </pre>
+                    <p>In the above example, volume is set to be 90% to both sources and returns an array of sound sources, which has two elements.</p>
+                    <p>If <a href="#preLoad">preLoad</a> is set to be true, all sound sources will be loaded. And if there is a callback function defined, it will be called when all sources are loaded. Note that callback function can be undefined or defined as a function, but cannot be an array of functions.</p>
+                    <pre class="brush: js; toolbar: false;">
+                    var urls = ['resource/in.wav',
+                                'resource/out.wav'];
+                    var engine = new jWebAudio.SoundEngine();
+                    var sources = engine.addSoundSource({
+                        'url': urls,
+                        'preLoad': true,
+                        'callback': function() {
+                            alert('This will be called when all'
+                                    + ' sound sources are loaded!');
+                        }
+                    });
+                    </pre>
+                    <p>To <a href="#load">load</a> an array of sound sources rather than using <a href="#preLoad">preLoad</a>, you should pay additional attention to callback functions in load. </p>
+                    <p>The following is the WRONG way to achieve this.</p>
+                    <pre class="brush: js; highlight: [9, 11]; toolbar: false;">
+                    var urls = ['resource/in.wav',
+                                'resource/out.wav'];
+                    var engine = new jWebAudio.SoundEngine();
+                    var sources = engine.addSoundSource({
+                        'url': urls
+                    });
+                    for (var i in sources) {
+                        /* This is WRONG!!! */
+                        sources[i].load(function() {
+                            console.log('Loaded ' + i + '!');
+                        };
+                    }
+                    </pre>
+                    <p>You may expect the above example to output 'Loaded 0!' and 'Loaded 1!' but in reality, it will output 'Loaded 1!' twice. </p>
+                    <p>This is because every anonymous callback function has the onload activation object in its scope chain, referring to the same i. When onload returns, the value of i is 1 in this case, so it will output 'Loaded 1!' twice. </p>
+                    <p>The right thing to do is as the following.</p>
+                    <pre class="brush: js; highlight: [9, 14]; toolbar: false;">
+                    var urls = ['resource/in.wav',
+                                'resource/out.wav'];
+                    var engine = new jWebAudio.SoundEngine();
+                    var sources = engine.addSoundSource({
+                        'url': urls
+                    });
+                    for (var i in sources) {
+                        /* This is RIGHT!!! */
+                        sources[i].load(function(realIndex) {
+                            return function() {
+                                console.log('Loaded ' + realIndex
+                                        + '!');
+                            };
+                        }(i);
+                    }
+                    </pre>
+                    <p>See JavaScript closure and scope chain for more information.</p>
+                </div>
+                
+                <!----------- Load ----------->
+                <div class="subtitle" id="load">Load</div>
+                <p>If you wish to control when to load the audio into memory, load function should be called. </p>
+                <p>You shall always call load before <a href="#play">play</a>.
+                <div class="version">jQuery Version</div>
+                <div>
+                    <p>API:</p>
+                    <pre class="brush: js; toolbar: false;">
+                    // callback function is optional and will be
+                    // called after loaded if is defined
+                    $(...).jWebAudio('load', callback);
+                    </pre>
+                    <p>Example:</p>
+                    <pre class="brush: js; toolbar: false;">
+                    $('#audio').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg'
+                    });
+                    $('#audio').jWebAudio('load', function() {
+                        alert('loaded!');
+                    });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <p>API:</p>
+                    <pre class="brush: js; toolbar: false;">
+                    // callback function is optional and will be
+                    // called after loaded if is defined
+                    soundSource.load(callback);
+                    </pre>
+                    <p>Example:</p>
+                    <pre class="brush: js; toolbar: false;">
+                    var engine = new jWebAudio.SoundEngine();
+                    var source = engine.addSoundSource({
+                        'url': 'resource/a.ogg'
+                    });
+                    source.load(function() {
+                        alert('loaded!');
+                    });
+                    </pre>
+                    <p>If you wish to use callback functions when loading an array of sound sources, please refer to <a href="#addSoundSource">addSoundSource</a> for help.</p>
+                </div>
+                
+                <!----------- PreLoad ----------->
+                <div class="subtitle" id="preLoad">PreLoad</div>
+                <p>Load the autio when calling addSoundSource.</p>
+                <p>See <a href="#play">play</a> for more information.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; highlight: [3, 4, 5, 6]; toolbar: false;">
+                    $('#audio').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg',
+                        'preLoad': true,
+                        'callback': function() {
+                            alert('loaded');
+                        }
+                    });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight: [4, 5, 6, 7]; toolbar: false;">
+                    var engine = new jWebAudio.SoundEngine();
+                    var source = engine.addSoundSource({
+                        'url': 'resource/a.ogg',
+                        'preLoad': true,
+                        'callback': function() {
+                            alert('loaded');
+                        }
+                    });
+                    </pre>
+                </div>
+                
+                <!----------- Play ----------->
+                <div class="subtitle" id="play">Play</div>
+                <p>Plays a piece of audio. </p>
+                <p>You shall always call <a href="#load">load</a> before play.</p>
+                <p>See <a href="#multishot">multishot</a> for more information.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; highlight:5; toolbar: false;">
+                    $('#audio').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg'
+                    });
+                    $('#audio').jWebAudio('load', function() {
+                        $('#audio').jWebAudio.('play');
+                    });
+                    </pre>
+                    <p>This has the same result as the following. See <a href="#preLoad">preLoad</a> for more information.</p>
+                    <pre class="brush: js; highlight:5; toolbar: false;">
+                    $('#audio').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg',
+                        'preLoad': true,
+                        'callback': function() {
+                            $('#audio').jWebAudio('play');
+                        }
+                    });
+                    </pre>
+                </div>
+                
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight: 7; toolbar: false;">
+                    var engine = new jWebAudio.SoundEngine();
+                    var source = engine.addSoundSource({
+                        'url': 'resource/a.ogg'
+                    });
+                    source.load(function() {
+                        /* Play sound instantly */
+                        source.sound.play();
+                    });
+                    </pre>
+                    <p>This has the same result as the following. See <a href="#preLoad">preLoad</a> for more information.</p>
+                    <pre class="brush: js; highlight: 8; toolbar: false;">
+                        function onload() {
+                            var engine = new jWebAudio.SoundEngine();
+                            var source = engine.addSoundSource({
+                                'url': 'resource/a.ogg',
+                                'preLoad': true,
+                                'callback': function() {
+                                    /* Play sound instantly */
+                                    source.sound.play();
+                                }
+                            });
+                        }
+                    </pre>
+                </div>
+                
+                <p>
+                    Sometimes, however, you may want to delay loading the audio (e.g.: loading at the start of a level and play when killing an enemy). Then, the following is what you want.
+                </p>
+                
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                    $('#audio').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg',
+                        'volume': 80
+                    });
+                    
+                    // load audio
+                    var loaded = false;
+                    function onLevelStart() {
+                        $('#audio').jWebAudio('load', function() {
+                            loaded = true;
+                        });
+                    }
+                    
+                    // play audio
+                    function onEnemyKilled() {
+                        if (loaded) {
+                            $('#audio').jWebAudio('play');
+                        }
+                    }
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                    var engine = new jWebAudio.SoundEngine();
+                    var source = engine.addSoundSource({
+                        'url': 'resource/a.ogg',
+                        'volume': 80
+                    });
+                    
+                    // load audio
+                    var loaded = false;
+                    function onLevelStart() {
+                        source.load(function() {
+                            loaded = true;
+                        });
+                    }
+                    
+                    // play audio
+                    function onEnemyKilled() {
+                        if (loaded) {
+                            source.sound.play();
+                        }
+                    }                    
+                    </pre>
+                </div>
+                
+                <!----------- Pause ----------->
+                <div class="subtitle" id="pause">Pause</div>
+                <p>Pauses a piece of audio.</p>
+                <p><a href="#multishot">Multishot</a> audio cannot be paused.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        $('#audio').jWebAudio('pause');
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        sound.pause();
+                    </pre>
+                </div>
+                
+                <!----------- Stop ----------->
+                <div class="subtitle" id="stop">Stop</div>
+                <p>Stops a piece of audio.</p>
+                <p><a href="#multishot">Multishot</a> audio cannot be stopped.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        $('#audio').jWebAudio('stop');
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        sound.stop();
+                    </pre>
+                </div>
+                
+                <!----------- Volume ----------->
+                <div class="subtitle" id="volume">Volume</div>
+                <p>Sets percentage of volume.</p>
+                <p>Volume of 100 is the default system volume. Volume of more than 100 is supported.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        $('#audio').jWebAudio('options', {
+                            'volume': parseInt(100)
+                        });
+                    </pre>
+                    <p>You may set other options in one command in jQuery version. But if you wish to set loop option, make sure you set before <a href="#load">load</a> or <a href="#play">play</a>. See <a href="#loop">loop</a> for more information.</p>
+                    <pre class="brush: js; toolbar: false;">
+                        $('#audio').jWebAudio('options', {
+                            'volume': parseInt(100),
+                            'muted': false
+                        });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        // set volume
+                        sound.setVolume(100);
+                        // get volume
+                        var volume = source.sound.getVolume();
+                    </pre>
+                </div>
+                
+                <!----------- Mute ----------->
+                <div class="subtitle" id="mute">Mute</div>
+                <p>Sets a piece of audio to be muted.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        $('#audio').jWebAudio('options', {
+                            'muted': true
+                        });
+                    </pre>
+                    <p>You may set other options in one command in jQuery version. See <a href="#volume">volume</a> for more information.</p>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        // set muted
+                        sound.setMuted(true);
+                        // get muted
+                        var muted = sound.getMuted();
+                    </pre>
+                </div>
+                
+                <!----------- Loop ----------->
+                <div class="subtitle" id="loop">Loop</div>
+                <p>Continue to play from the beginning once played to the end of audio.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                    $('#audio').jWebAudio('addSoundSource', {
+                        'url': 'resource/a.ogg',
+                        'loop': true
+                    });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight: 4; toolbar: false;">
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': 'resource/a.ogg'
+                            'loop': true
+                        });
+                        source.sound.play();
+                        
+                        // get loop
+                        var loop = source.sound.getLoop();
+                    </pre>
+                </div>
+                
+                <!----------- Seek ----------->
+                <div class="subtitle" id="seek">Seek</div>
+                <p>Seeks a position to start playing.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        // seek to position at 10 seconds
+                        $('#audio').jWebAudio('seek', 10);
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        // seek to position at 10 seconds
+                        source.sound.seek(10);
+                        // get the total length of sound, in seconds
+                        var duration = source.sound.duration;
+                        // get the current position of sound, in seconds
+                        var position = source.sound.offset;
+                    </pre>
+                </div>
+                
+                <!----------- Multishot ----------->
+                <div class="subtitle" id="multishot">Multishot</div>
+                <p>Short audio like gun-shooting sound may be played another time before one is ended. Rather than making more than one instance of audio, multishot enables you to play multi-times in a short period.</p>
+                <p>So, once shot, you cannot <a href="#pause">pause</a> or <a href="#seek">seek</a> a position to play. Calling <a href="#play">play</a> will play a new sound and calling <a href="#stop">stop</a> will stop all sounds.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; highlight:3; toolbar: false;">
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': 'resource/a.ogg',
+                            'multishot': true
+                        });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight:4; toolbar: false;">
+                        var engine = new jWebAudio.SoundEngine();
+                        var source = engine.addSoundSource({
+                            'url': 'resource/a.ogg',
+                            'multishot': true
+                        });
+                    </pre>
+                </div>
+                
+                <!----------- Sound Effects ----------->
+                <div class="subtitle" id="effect">Sound Effects</div>
+                <p>Sound effects include telephonize and cathedral currently. And you may create new sound effects using the combination of LOWPASS, HIGHPASS, BANDPASS, LOWSHELF, HIGHSHELF, PEAKING, NOTCH, ALLPASS.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        // Add sound effect
+                        // Returns id of effect
+                        var id = $('#div1').jWebAudio('addEffect', 
+                                'telephonize');
+                        // Delete with id
+                        $('#div1').jWebAudio('deleteEffect', id);
+                        // Delete all effects
+                        $('#div1').jWebAudio('clearAllEffects');
+
+                        // create user-defined sound effect
+                        var id = $('#div1').jWebAudio('addEffect', {
+                            name: 'myEffect', 
+                            options: [{
+                                "type": jWebAudio.Filter.prototype.LOWPASS,
+                                "frequency": 1000.0
+                            }, {
+                                "type": jWebAudio.Filter.prototype.HIGHPASS,
+                                "frequency": 500.0
+                            }]
+                        });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        // Add sound effect
+                        // Returns id of effect
+                        var id = sound.addEffect('telephonize');
+                        // Delete with id
+                        sound.deleteEffect(id);
+                        // Delete all effects
+                        sound.clearAllEffects();
+
+                        // create user-defined sound effect
+                        var id = sound.addEffect(new jWebAudio.Filter(
+                            'myEffect', 
+                            [{
+                                "type": jWebAudio.Filter.prototype.LOWPASS,
+                                "frequency": 1000.0
+                            }, {
+                                "type": jWebAudio.Filter.prototype.HIGHPASS,
+                                "frequency": 500.0
+                            }]
+                        ));
+                    </pre>
+                </div>
+                
+                <!----------- 3D Sound Effect ----------->
+                <div class="subtitle" id="3d">3D Sound Effect</div>
+                <p>3D sound effect enables you to set the position of sound source to listener.</p>
+                <p>See <a href="#effect">Sound Effect</a> for more information.</p>
+                
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; highlight: 3; toolbar: false;">
+                        var id = $('#div1').jWebAudio('addEffect', '3d');
+                        effect = $('#div1').jWebAudio('getEffect', id);
+                        effect.soundObject.setPosition(1, 0, 0);
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight: 3; toolbar: false;">
+                        var id = source.sound.addEffect('3d');
+                        effect = source.sound.getEffect(id);
+                        effect.soundObject.setPosition(1, 0, 0);
+                    </pre>
+                </div>
+                
+                <p>The above examples shows how to set the position of the audio source relative to the listener attribute. A 3D cartesian coordinate system is used. Default position is (0, 0, 0). </p>
+                <p>There are also other functions and attributes you may set. See <a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#dfn-setPosition">specification</a> for more information.</p>
+                
+                <!----------- Fade in and out ----------->
+                <div class="subtitle" id="fadeInOut">Fade in and fade out</div>
+                <p>Fade in makes audio starts from no sound linearly when plays and seeks, while fade out makes audio ends with no sound linearly when plays to the end or stops.</p>
+                <p>If fadeIn is set to be true (default false) but fadeInTime is not defined, then default fade in time will be used, which is 3 seconds. And it is the same with fade out.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; highlight: [3, 4, 5]; toolbar: false;">
+                        $('#audio').jWebAudio('addSoundSource', {
+                            'url': ...,
+                            'fadeIn': true,
+                            'fadeOut': true,
+                            'fadeInTime': 5 // in seconds
+                        });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; highlight: [3, 4, 5]; toolbar: false;">
+                        source = engine.addSoundSource({
+                            'url': ...,
+                            'fadeIn': true,
+                            'fadeOut': true,
+                            'fadeInTime': 5 // in seconds
+                        });
+                    </pre>
+                </div>
+                <p>Fade in and fade out can be changed after plays. But will only applies when next play, seek or stop is called.</p>
+                <div class="version">jQuery Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        $('#audio').jWebAudio('options', {
+                            'fadeIn': true,
+                            'fadeInTime': 5,
+                            'fadeOut': true
+                        });
+                    </pre>
+                </div>
+                <div class="version">Standard Version</div>
+                <div>
+                    <pre class="brush: js; toolbar: false;">
+                        // set fade here
+                        source.sound.setFadeIn(true, 5);
+                        // use default fading time, which is 3
+                        source.sound.setFadeOut(true); 
+                    </pre>
+                </div>
+            </div>
+            
+            <div id="notice">
+                <div class="title">Notice</div>
+                <div class="subtitle">Resource downloaded</div>
+                <p>Sound file named 'a.ogg' in examples of this site is downloaded from <a href="http://musopen.org/music/piece/744">here</a> under the license of <a href="http://creativecommons.org/publicdomain/mark/1.0/">Public Domain</a> and it was made by <a href="http://en.wikipedia.org/wiki/Antonio_Lotti">Antonio Lotti</a>.</p>
+                <p>Sound files named 'in.wav' and 'out.wav' in examples of this site are downloaded from <a href="http://www.mediacollege.com/downloads/sound-effects/electronics/computer/">http://www.mediacollege.com</a> under <a href="http://www.mediacollege.com/downloads/permission/public-domain.html">Public Domain Permission</a>.</p>
+            </div>
+        </div>
+        <div id="sidebar">
+            <div id="nav">
+                <div id="homeNav" class="navBtn">Home</div>
+                <div id="featuresNav" class="navBtn">Features</div>
+                <div id="downloadNav" class="navBtn">Download</div>
+                <div id="examplesNav" class="navBtn">Examples</div>
+                <div id="demoNav" class="navBtn">Demo</div>
+                <div id="apiNav" class="navBtn">API</div>
+                <div id="noticeNav" class="navBtn">Notice</div>
+            </div>
+        </div>
+        <div id="apiSideBar">
+            <div id="addSoundSourceApi" class="navBtn">Add Sound Source</div>
+            <div id="loadApi" class="navBtn">Load</div>
+            <div id="preLoadApi" class="navBtn">PreLoad</div>
+            <div id="playApi" class="navBtn">Play</div>
+            <div id="pauseApi" class="navBtn">Pause</div>
+            <div id="stopApi" class="navBtn">Stop</div>
+            <div id="volumeApi" class="navBtn">Volume</div>
+            <div id="muteApi" class="navBtn">Mute</div>
+            <div id="loopApi" class="navBtn">Loop</div>
+            <div id="seekApi" class="navBtn">Seek</div>
+            <div id="multishotApi" class="navBtn">Multishot</div>
+            <div id="effectApi" class="navBtn">Sound Effects</div>
+            <div id="3dApi" class="navBtn">3D Sound Effect</div>
+            <div id="fadeInOutApi" class="navBtn">Fade In & Out</div>
+        </div>
+    </body>
+</html>

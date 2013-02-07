@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            var source = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        source.sound.play();
+                        document.getElementById('volume').disabled = false;
+                    },
+                    'volume': 50
+                });
+            }
+            
+            function volumeChange() {
+                var vol = document.getElementById('volume').value;
+                // set volume
+                source.sound.setVolume(parseInt(vol));
+                // get volume
+                document.getElementById('output').innerHTML = 
+                        source.sound.getVolume();
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div id="panel">
+                Volume: <div id="output">50</div>
+                <input id="volume" type="range" min="0" max="100" value="50" onchange="volumeChange()" disabled="true" />
+            </div>
+            
+            <div class="title">Description:</div>
+            Change the volume of sound.
+            
+            <div class="title">Result:</div>
+            Volume changes with input.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [18, 20, 21]; toolbar: false;">
+            var source = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        source.sound.play();
+                    },
+                    'volume': 50
+                });
+            }
+            
+            function volumeChange() {
+                var vol = document.getElementById('volume').value;
+                // set volume
+                source.sound.setVolume(parseInt(vol));
+                // get volume
+                document.getElementById('output').innerHTML = 
+                        source.sound.getVolume();
+            }
+            </pre>
+        </div>
+    </body>
+</html>

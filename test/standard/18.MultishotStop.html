@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            var source = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'multishot': true,
+                    'preLoad': true,
+                    'callback': function() {
+                        document.getElementById('playBtn').disabled = false;
+                        document.getElementById('stopBtn').disabled = false;
+                    }
+                });
+            }
+            
+            function play() {
+                source.sound.play();
+            }
+            
+            function stop() {
+                source.sound.stop();
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div id="panel">
+                <button id="playBtn" onclick="play();" disabled="true">Play</button>
+                <button id="stopBtn" onclick="stop();" disabled="true">Stop</button>
+            </div>
+            
+            <div class="title">Description:</div>
+            Multishot play and stop.
+            
+            <div class="title">Result:</div>
+            Play multi times. Stop all when click stop button.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [7, 21]; toolbar: false;">
+            var source = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'multishot': true,
+                    'preLoad': true,
+                    'callback': function() {
+                        document.getElementById('playBtn').disabled = false;
+                        document.getElementById('stopBtn').disabled = false;
+                    }
+                });
+            }
+            
+            function play() {
+                source.sound.play();
+            }
+            
+            function stop() {
+                source.sound.stop();
+            }
+            </pre>
+        </div>
+    </body>
+</html>

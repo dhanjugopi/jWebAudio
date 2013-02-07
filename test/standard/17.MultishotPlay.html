@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            var source = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/in.wav',
+                    'multishot': true,
+                    'preLoad': true,
+                    'callback': function() {
+                        document.getElementById('btn').disabled = false;
+                    }
+                });
+            }
+            
+            function play() {
+                source.sound.play();
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div id="panel">
+                <button id="btn" onclick="play();" disabled="true">Play</button>
+            </div>
+            
+            <div class="title">Description:</div>
+            Multishot play.
+            
+            <div class="title">Result:</div>
+            Play multi times.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: 7; toolbar: false;">
+            var source = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/in.wav',
+                    'multishot': true,
+                    'preLoad': true,
+                    'callback': function() {
+                        document.getElementById('btn').disabled = false;
+                    }
+                });
+            }
+            
+            function play() {
+                source.sound.play();
+            }
+            </pre>
+        </div>
+    </body>
+</html>

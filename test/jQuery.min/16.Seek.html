@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            // duration is the length of sound, in seconds
+            var duration = null;
+            
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                        
+                        duration = $('#audio').jWebAudio('duration');
+                        $('#totalSpan').text(Math.ceil(duration));
+                        
+                        $('#posInput')[0].disabled = false;
+                        
+                        // update position 10 times per second
+                        setInterval(updatePos, 100);
+                    }
+                });
+            }
+            
+            function posChange() {
+                var pos = Math.min($('#posInput')[0]
+                        .value / 100 * duration, duration);
+                // set position
+                $('#audio').jWebAudio('seek', pos);
+            }
+            
+            function updatePos() {
+                // get position
+                var pos = $('#audio').jWebAudio('seek');
+                $('#posInput')[0].value = pos / duration * 100;
+                $('#posSpan').text(Math.ceil(pos));
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="audio" class="sound"></div>
+        
+        <div id="content">
+            <div id="panel">
+                <input id="posInput" type="range" value="0" onchange="posChange()" disabled="true" min="0" max="100" /><br>
+                Position: <span id="posSpan">0</span><br>
+                Total:<span id="totalSpan">0</span>
+            </div>
+            
+            <div class="title">Description:</div>
+            Seek the position of sound.
+            
+            <div class="title">Result:</div>
+            Play with the given position.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [11, 26, 31]; toolbar: false;">
+            // duration is the length of sound, in seconds
+            var duration = null;
+            
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                        
+                        duration = $('#audio').jWebAudio('duration');
+                        $('#totalSpan').text(Math.ceil(duration));
+                        
+                        $('#posInput')[0].disabled = false;
+                        
+                        // update position 10 times per second
+                        setInterval(updatePos, 100);
+                    }
+                });
+            }
+            
+            function posChange() {
+                var pos = Math.min($('#posInput')[0]
+                        .value / 100 * duration, duration);
+                // set position
+                $('#audio').jWebAudio('seek', pos);
+            }
+            
+            function updatePos() {
+                // get position
+                var pos = $('#audio').jWebAudio('seek');
+                $('#posInput')[0].value = pos / duration * 100;
+                $('#posSpan').text(Math.ceil(pos));
+            }
+            </pre>
+        </div>
+    </body>
+</html>

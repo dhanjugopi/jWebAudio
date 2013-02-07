@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            function onload() {
+                $('.sound').each(function() {
+                    var url = '../../examples/resource/' + $(this).attr('id') + '.wav';
+                    $(this).jWebAudio('addSoundSource', {
+                        url: url,
+                        preLoad: true
+                    });
+                });
+            }
+            
+            function onPlayA() {
+                $('#in').jWebAudio('play');
+                $('#playA')[0].disabled = true;
+            }
+            
+            function onPlayB() {
+                $('#out').jWebAudio('play');
+                $('#playB')[0].disabled = true;
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="in" class="sound"></div>
+        <div id="out" class="sound"></div>
+        
+        <div id="content">            
+            <div id="panel">
+                <button id="playA" onclick="onPlayA();">Play A</button>
+                <button id="playB" onclick="onPlayB();">Play B</button>
+            </div>
+            
+            <div class="title">Description:</div>
+            Play sounds added using array.
+            
+            <div class="title">Result:</div>
+            Play respective sound when click button.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; toolbar: false;">
+            function onload() {
+                $('.sound').each(function() {
+                    var url = '../../examples/resource/' + $(this).attr('id') + '.wav';
+                    $(this).jWebAudio('addSoundSource', {
+                        url: url,
+                        preLoad: true
+                    });
+                });
+            }
+            
+            function onPlayA() {
+                $('#in').jWebAudio('play');
+                $('#playA')[0].disabled = true;
+            }
+            
+            function onPlayB() {
+                $('#out').jWebAudio('play');
+                $('#playB')[0].disabled = true;
+            }
+            </pre>
+        </div>
+    </body>
+</html>
