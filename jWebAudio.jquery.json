@@ -32,9 +32,9 @@
     }],
     "bugs": "https://github.com/01org/jWebAudio/issues",
     "homepage": "https://github.com/01org/jWebAudio",
-    "docs": "https://github.com/01org/jWebAudio",
-    "demo": "https://github.com/01org/jWebAudio/tree/master/test",
-    "download": "https://github.com/01org/jWebAudio/tree/master/build",
+    "docs": "http://01org.github.com/jWebAudio/index.html#api",
+    "demo": "http://01org.github.com/jWebAudio/index.html#demo",
+    "download": "http://01org.github.com/jWebAudio/index.html#download",
     "dependencies": {
         "jquery": ">1.5"
     }
