@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script type="text/javascript" src="../build/standard.jWebAudio.js"></script>
+        
+        <script type="text/javascript" src="js/shCore.js"></script>
+        <script type="text/javascript" src="js/shBrushJScript.js"></script>
+        <script type="text/javascript" src="js/shBrushXml.js"></script>
+        
+        <link href="css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript">
+            function onload() {
+                /* Create sound with url.
+                 * Note that sound is not actually loaded yet. So it is 
+                 * recommended that you create all sounds that will be used
+                 * later and load them when necessary. If the sound is not
+                 * loaded when play, it will automatically load.
+                 *
+                 * Each element div can contain at most one sound.
+                 * You may set those divs to be invisible if you wish.
+                 */
+                var engine = new jWebAudio.SoundEngine();
+                var source = engine.addSoundSource({
+                    'url': 'resource/a.ogg'
+                });
+                source.load(function() {
+                    /* Play sound instantly */
+                    source.sound.play();
+                });
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    <body style="background-color:#0A2B1D" onload="onload();">
+        <div id="div1"></div>
+        <pre class="brush: js; highlight: 17; toolbar: false;">
+            function onload() {
+                /* Create sound with url.
+                 * Note that sound is not actually loaded yet. So it is 
+                 * recommended that you create all sounds that will be used
+                 * later and load them when necessary. If the sound is not
+                 * loaded when play, it will automatically load.
+                 *
+                 * Each element div can contain at most one sound.
+                 * You may set those divs to be invisible if you wish.
+                 */
+                var engine = new jWebAudio.SoundEngine();
+                var source = engine.addSoundSource({
+                    'url': 'resource/a.ogg'
+                });
+                source.load(function() {
+                    /* Play sound instantly */
+                    source.sound.play();
+                });
+            }
+        </pre>
+    </body>
+</html>

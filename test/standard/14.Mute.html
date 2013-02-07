@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            var source = null;
+            
+            var muted = false;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        source.sound.play();
+                        document.getElementById('btn').disabled = false;
+                    }
+                });
+            }
+            
+            function mute() {
+                if (muted) {
+                    // set unmuted
+                    document.getElementById('btn').innerHTML = 'Mute';
+                    source.sound.setMuted(false);
+                } else {
+                    // set muted
+                    document.getElementById('btn').innerHTML = 'Unmute';
+                    source.sound.setMuted(true);
+                }
+                muted = source.sound.getMuted();
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div id="panel">
+                <button id="btn" onclick="mute();" disabled="true">Mute</button>
+            </div>
+            
+            <div class="title">Description:</div>
+            Mute sound and unmute again.
+            
+            <div class="title">Result:</div>
+            Mute and unmute sound when click the button.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: [21, 25]; toolbar: false;">
+            var source = null;
+            
+            var muted = false;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        source.sound.play();
+                        document.getElementById('btn').disabled = false;
+                    }
+                });
+            }
+            
+            function mute() {
+                if (muted) {
+                    // set unmuted
+                    document.getElementById('btn').innerHTML = 'Mute';
+                    source.sound.setMuted(false);
+                } else {
+                    // set muted
+                    document.getElementById('btn').innerHTML = 'Unmute';
+                    source.sound.setMuted(true);
+                }
+                muted = !muted;
+            }
+            </pre>
+        </div>
+    </body>
+</html>

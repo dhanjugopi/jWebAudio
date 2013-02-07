@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="../../build/standard.jWebAudio.min.js"></script>
+        
+        <script type="text/javascript">
+            var source = null;
+            // duration is the length of sound, in seconds
+            var duration = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        source.sound.play();
+                        
+                        duration = source.sound.duration;
+                        document.getElementById('totalSpan').innerHTML = Math.ceil(duration);
+                        
+                        document.getElementById('posInput').disabled = false;
+                        
+                        // update position 10 times per second
+                        setInterval(updatePos, 100);
+                    },
+                    'finish': function() {
+                        alert('Finished!');
+                        document.getElementById('posInput').disabled = true;
+                    }
+                });
+            }
+            
+            function posChange() {
+                var pos = Math.min(document.getElementById('posInput')
+                        .value / 100 * duration, duration);
+                // set position
+                source.sound.seek(pos);
+            }
+            
+            function updatePos() {
+                var pos = source.sound.offset;
+                document.getElementById('posInput').value = pos / duration * 100;
+                document.getElementById('posSpan').innerHTML = Math.ceil(pos);
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="content">
+            <div id="panel">
+                <input id="posInput" type="range" value="0" onchange="posChange()" disabled="true" min="0" max="100" /><br>
+                Position: <span id="posSpan">0</span><br>
+                Total:<span id="totalSpan">0</span>
+            </div>
+            
+            <div class="title">Description:</div>
+            Event called when sound plays to the end.
+            
+            <div class="title">Result:</div>
+            Alert 'finish' when sound plays to the end.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: 21; toolbar: false;">
+            var source = null;
+            // duration is the length of sound, in seconds
+            var duration = null;
+            
+            function onload() {
+                var engine = new jWebAudio.SoundEngine();
+                source = engine.addSoundSource({
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        source.sound.play();
+                        
+                        duration = source.sound.duration;
+                        document.getElementById('totalSpan').innerHTML = Math.ceil(duration);
+                        
+                        document.getElementById('posInput').disabled = false;
+                        
+                        // update position 10 times per second
+                        setInterval(updatePos, 100);
+                    },
+                    'finish': function() {
+                        alert('Finished!');
+                    }
+                });
+            }
+            
+            function posChange() {
+                var pos = Math.min(document.getElementById('posInput')
+                        .value / 100 * duration, duration);
+                // set position
+                source.sound.seek(pos);
+            }
+            
+            function updatePos() {
+                var pos = source.sound.offset;
+                document.getElementById('posInput').value = pos / duration * 100;
+                document.getElementById('posSpan').innerHTML = Math.ceil(pos);
+            }
+            </pre>
+        </div>
+    </body>
+</html>

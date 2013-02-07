@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <link href="../common.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="../../examples/css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="../../examples/js/shCore.js"></script>
+        <script type="text/javascript" src="../../examples/js/shBrushJScript.js"></script>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../../build/jquery.jWebAudio.js"></script>
+        
+        <script type="text/javascript">
+            var playing = false;
+            
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                        playing = true;
+                        $('#btn')[0].disabled = false;
+                    }
+                });
+            }
+            
+            function play() {
+                if (playing) {
+                    // pause
+                    $('#btn').text('Play');
+                    $('#audio').jWebAudio('stop');
+                } else {
+                    // play
+                    $('#btn').text('Stop');
+                    $('#audio').jWebAudio('play');
+                }
+                playing = !playing;
+            }
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    
+    <body onload="onload();">
+        <div id="audio" class="sound"></div>
+        
+        <div id="content">
+            <div id="panel">
+                <button id="btn" onclick="play();" disabled="true">Stop</button>
+            </div>
+            
+            <div class="title">Description:</div>
+            Stop sound and play again.
+            
+            <div class="title">Result:</div>
+            Stop sound when click the stop button. Play sound when click the play button.
+            
+            <div class="title">Code:</div>
+            <pre class="brush: js; highlight: 22; toolbar: false;">
+            var playing = false;
+            
+            function onload() {
+                $('#audio').jWebAudio('addSoundSource', {
+                    'url': '../../examples/resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#audio').jWebAudio('play');
+                        playing = true;
+                        $('#btn')[0].disabled = false;
+                    }
+                });
+            }
+            
+            function play() {
+                if (playing) {
+                    // pause
+                    $('#btn').text('Play');
+                    $('#audio').jWebAudio('stop');
+                } else {
+                    // play
+                    $('#btn').text('Stop');
+                    $('#audio').jWebAudio('play');
+                }
+                playing = !playing;
+            }
+            </pre>
+        </div>
+    </body>
+</html>

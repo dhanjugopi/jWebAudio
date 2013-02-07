@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="../build/jquery.jWebAudio.js"></script>
+        
+        <script type="text/javascript" src="js/shCore.js"></script>
+        <script type="text/javascript" src="js/shBrushJScript.js"></script>
+        <script type="text/javascript" src="js/shBrushXml.js"></script>
+        
+        <link href="css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="css/shThemeDjango.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#div1').jWebAudio('addSoundSource', {
+                    'url': 'resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#div1').jWebAudio('play');
+                    }
+                });
+                
+                var useEffect = false;
+                var id = null;
+                $('#effectBtn').click(function() {
+                    useEffect = !useEffect;
+                    if (useEffect) {
+                        id = $('#div1').jWebAudio('addEffect', 'telephonize');
+                    } else if (id !== null) {
+                        $('#div1').jWebAudio('deleteEffect', id);
+                    }
+                });
+            });
+            
+            SyntaxHighlighter.all();
+        </script>
+    </head>
+    <body style="background-color:#0A2B1D">
+        <button id="effectBtn">Telephone Effect</button>
+        <div id="div1"></div>
+        <pre class="brush: js; highlight: [15, 17]; toolbar: false;">
+            $(document).ready(function() {
+                $('#div1').jWebAudio('addSoundSource', {
+                    'url': 'resource/a.ogg',
+                    'preLoad': true,
+                    'callback': function() {
+                        $('#div1').jWebAudio('play');
+                    }
+                });
+                
+                var useEffect = false;
+                var id = null;
+                $('#effectBtn').click(function() {
+                    useEffect = !useEffect;
+                    if (useEffect) {
+                        id = $('#div1').jWebAudio('addEffect', 'telephonize');
+                    } else if (id !== null) {
+                        $('#div1').jWebAudio('deleteEffect', id);
+                    }
+                });
+            });
+        </pre>
+    </body>
+</html>
