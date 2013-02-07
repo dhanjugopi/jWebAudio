@@ -1,0 +1,42 @@
+{
+    "name": "jWebAudio",
+    "title": "jQuery Web Audio",
+    "description": "jQuery Web Audio library designed for games.",
+    "keywords": [
+        "audio",
+        "sound",
+        "music",
+        "game"
+    ],
+    "version": "0.1.0",
+    "author": {
+        "name": "Intel Inc.",
+        "url": "http://intel.com"
+    },
+    "maintainers": [{
+        "name": "Wenli Zhang",
+        "email": "OviliaZhang@gmail.com",
+        "url": "http://zhangwenli.com"
+    }, {
+        "name": "Xingnan Wang",
+        "email": "xingnan.wang@intel.com",
+        "url": "https://github.com/xingnan"
+    }, {
+        "name": "James Wei",
+        "email": "james.wei@intel.com",
+        "url": "https://github.com/wistoch"
+    }],
+    "licenses": [{
+        "type": "Apacje-2.0",
+        "url": "https://github.com/01org/jWebAudio/blob/master/LICENSE.md"
+    }],
+    "bugs": "https://github.com/01org/jWebAudio/issues",
+    "homepage": "https://github.com/01org/jWebAudio",
+    "docs": "https://github.com/01org/jWebAudio",
+    "demo": "https://github.com/01org/jWebAudio/tree/master/test",
+    "download": "https://github.com/01org/jWebAudio/tree/master/build",
+    "dependencies": {
+        "jquery": ">1.5"
+    }
+}
+
