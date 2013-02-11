@@ -1,8 +1,9 @@
 jWebAudio
 =========
 
-JavaScript Web Audio library designed for web games
-with both jQuery version and standard version.
+JavaScript Web Audio library designed for web games with both jQuery version and standard version.
+
+Examples and API available at http://01org.github.com/jWebAudio/ .
 
 License
 -------
